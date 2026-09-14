@@ -15,7 +15,14 @@ local ConfirmTitle = Instance.new("TextLabel")
 local ConfirmYes = Instance.new("TextButton")
 local ConfirmNo = Instance.new("TextButton")
 
-ScreenGui.Parent = game:GetService("CoreGui") or game.Players.LocalPlayer.PlayerGui
+-- FIX BẢO MẬT CORE GUI / PLAYER GUI
+local success, _ = pcall(function()
+    ScreenGui.Parent = game:GetService("CoreGui")
+end)
+
+if not success or not ScreenGui.Parent then
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+end
 
 -- Frame Chính
 MainFrame.Size = UDim2.new(0, 520, 0, 380)
