@@ -25,17 +25,23 @@
 
   <script>
     function copyScript() {
+      // Đường dẫn chính xác 100% tới file script.lua
       const rawUrl = 'https://raw.githubusercontent.com/redkaideptrai-bit/mycsript/main/script.lua';
       
       fetch(rawUrl)
-        .then(response => response.text())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Không tìm thấy tệp script.lua (Lỗi ' + response.status + ')');
+          }
+          return response.text();
+        })
         .then(luaCode => {
           navigator.clipboard.writeText(luaCode).then(() => {
             alert('Đã sao chép toàn bộ code Lua của TSOG HUB thành công!');
           });
         })
         .catch(err => {
-          alert('Lỗi khi tải code Lua! Vui lòng kiểm tra lại kết nối.');
+          alert('Lỗi: ' + err.message);
         });
     }
   </script>
