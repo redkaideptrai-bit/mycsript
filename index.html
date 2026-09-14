@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TSOG HUB - Official Website</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #121216; color: #fff; margin: 0; padding: 20px; text-align: center; }
-        h1 { color: #ffd700; }
-        .card { background: #1e1e24; padding: 20px; margin: 20px auto; max-width: 500px; border-radius: 12px; border: 2px solid #8232c8; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .btn { background: #8232c8; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px; }
-        .btn:active { background: #9b45e4; }
-    </style>
-</head>
-<body>
-    <h1>TSOG HUB SCRIPTS</h1>
-    <p>Trang web chia sẻ script Roblox sạch 100% không quảng cáo!</p>
+<script>
+  function copyScript() {
+    // Đường dẫn tới mã nguội Lua thô trên GitHub của Kai
+    const rawUrl = 'https://raw.githubusercontent.com/redkaideptrai-bit/mycsript/main/script.lua';
     
-    <div class="card">
-        <h3>🎮 Roblox Script (TSOG HUB)</h3>
-        <p>Bấm nút bên dưới để copy nhanh link loadstring script:</p>
-        <button class="btn" onclick="copyScript()">📋 Copy Script</button>
-    </div>
-
-    <script>
-        function copyScript() {
-            const script = "loadstring(game:HttpGet('https://raw.githubusercontent.com/redkaideptrai-bit/mycsript/main/script.lua'))()";
-            navigator.clipboard.writeText(script).then(() => {
-                alert("Đã copy script thành công vào bộ nhớ tạm!");
-            });
-        }
-    </script>
-</body>
-</html>
+    // Tải trực tiếp nội dung code Lua về rồi copy vào khay nhớ tạm
+    fetch(rawUrl)
+      .then(response => response.text())
+      .then(luaCode => {
+        navigator.clipboard.writeText(luaCode).then(() => {
+          alert('Đã sao chép toàn bộ code Lua của TSOG HUB thành công!');
+        });
+      })
+      .catch(err => {
+        alert('Lỗi khi tải code Lua! Vui lòng kiểm tra lại kết nối.');
+      });
+  }
+</script>
