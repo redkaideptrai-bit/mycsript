@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TSOG HUB - Official Website</title>
+  <title>TSOG HUB - Official Script Website</title>
   <style>
     body { font-family: Arial, sans-serif; background-color: #121216; color: #fff; margin: 0; padding: 20px; text-align: center; }
-    h1 { color: #ff4757; }
-    .card { background: #1e1e24; padding: 20px; margin: 20px auto; max-width: 500px; border-radius: 12px; border: 1px solid #0252c8; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-    .btn { background: #0252c8; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px; }
-    .btn:active { background: #0b45e4; }
+    h1 { color: #ff4757; margin-top: 30px; }
+    p { color: #aaa; }
+    .card { background: #1e1e24; padding: 25px; margin: 30px auto; max-width: 500px; border-radius: 12px; border: 1px solid #8232c8; box-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+    .btn { background: #8232c8; color: white; border: none; padding: 14px 28px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 15px; transition: 0.2s; }
+    .btn:hover { background: #9b42e6; }
+    .btn:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
 
   <h1>TSOG HUB SCRIPTS</h1>
-  <p>Trang web chia sẻ script Roblox sạch 100% không quảng cáo!</p>
+  <p>Website chia sẻ script Roblox TSOG HUB chính thức</p>
 
   <div class="card">
     <h3>TSOG HUB Script Full Version</h3>
-    <p>Bấm nút bên dưới để copy trực tiếp toàn bộ mã code Lua vào máy:</p>
+    <p>Bấm nút bên dưới để sao chép toàn bộ mã Script Lua vào bộ nhớ tạm:</p>
     <button class="btn" onclick="copyScript()">Copy Script</button>
   </div>
 
@@ -671,13 +673,12 @@ langEngBtn.MouseButton1Click:Connect(function() switchLanguage("ENG") end)`;
 
     function copyScript() {
       navigator.clipboard.writeText(luaScriptCode).then(() => {
-        alert('Đã sao chép toàn bộ code TSOG HUB vào bộ nhớ tạm thành công!');
-      }).catch(err => {
-        alert('Lỗi sao chép! Vui lòng thử lại.');
+        alert('Đã sao chép toàn bộ mã TSOG HUB thành công!');
+      }).catch(() => {
+        alert('Lỗi sao chép, vui lòng thử lại!');
       });
     }
   </script>
 
 </body>
 </html>
-index.html
