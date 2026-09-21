@@ -3,334 +3,824 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nice Hub & Ez Hub Web UI</title>
+    <title>TIENTRUONGSCRIPT - Kho Script Roblox</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            user-select: none;
+            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: #121214;
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* NICE HUB MAIN FRAME */
-        #nice-hub {
-            position: absolute;
-            top: 50px;
-            left: 50px;
-            width: 560px;
-            height: 380px;
-            background-color: #141418;
-            border-radius: 6px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            background-color: #0f0f13;
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            z-index: 10;
-        }
-
-        .top-bar {
-            height: 35px;
-            background-color: #0c0c0f;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 10px;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-            cursor: move;
+            padding: 30px 15px;
         }
 
-        .title {
-            font-weight: bold;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .window-controls {
-            display: flex;
-            gap: 2px;
-        }
-
-        .btn-control {
-            width: 35px;
-            height: 35px;
-            border: none;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-mini { background-color: #2d2d32; }
-        .btn-close { background-color: #b42828; }
-
-        .tab-container {
-            display: flex;
-            gap: 4px;
-            margin-right: 10px;
-        }
-
-        .tab-btn {
-            background-color: #19191e;
-            color: #b4b4b4;
-            border: none;
-            padding: 4px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .tab-btn.active {
-            background-color: #8232ca;
-            color: #fff;
-        }
-
-        .content-container {
-            padding: 10px;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .tab-page {
-            display: none;
-        }
-
-        .tab-page.active {
-            display: block;
-        }
-
-        .btn-item {
-            width: 100%;
-            padding: 8px 12px;
-            margin-bottom: 5px;
-            background-color: #202028;
-            border: none;
-            color: #e6e6e6;
-            text-align: left;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .btn-item:hover {
-            background-color: #2a2a35;
-        }
-
-        /* EZ HUB MENU FRAME */
-        #ez-hub-menu {
-            position: absolute;
-            top: 100px;
-            left: 650px;
-            width: 260px;
-            height: 180px;
-            background-color: #121216;
-            border: 2px solid #c81e1e;
-            border-radius: 10px;
-            display: none;
-            flex-direction: column;
-            z-index: 20;
-        }
-
-        /* BUBBLE LOGO R */
-        #bubble-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #0f0f0f;
-            border: 3.5px solid #dc1e1e;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-        }
-
-        .logo-r {
-            font-size: 32px;
-            font-weight: bold;
-            color: #ff1e1e;
-            text-shadow: 2px 1px #6e0000;
-            position: relative;
-        }
-
-        .logo-text {
-            position: absolute;
-            font-size: 9px;
-            font-weight: bold;
-            color: #fff;
-            transform: rotate(-45deg);
-            top: 8px;
-        }
-
-        /* MODAL CONFIRM */
-        .confirm-modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px;
-            background-color: #1e1e23;
-            border: 2px solid #b42828;
-            padding: 15px;
+        header {
             text-align: center;
-            display: none;
-            z-index: 30;
+            margin-bottom: 25px;
         }
 
-        .confirm-btns {
+        .site-title {
+            color: #ff3b5c;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .site-desc {
+            color: #a0a0ab;
+            font-size: 14px;
+            max-width: 320px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
             display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
+            flex-direction: column;
+            gap: 18px;
         }
 
-        .confirm-btns button {
-            padding: 6px 20px;
+        .card {
+            background-color: #14141d;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* CARD 1: NICE HUB */
+        .card-nice {
+            border: 1.5px solid #8b2cf5;
+        }
+
+        .card-nice .card-title {
+            color: #ff3b5c;
+        }
+
+        .card-nice .btn-copy {
+            background: linear-gradient(90deg, #9b30ff, #7928ca);
+            color: #ffffff;
+        }
+
+        /* CARD 2: FIX LAG */
+        .card-fixlag {
+            border: 1.5px solid #0070f3;
+        }
+
+        .card-fixlag .card-title {
+            color: #0070f3;
+        }
+
+        .card-fixlag .btn-copy {
+            background-color: #0070f3;
+            color: #ffffff;
+        }
+
+        /* CARD 3: EZ HUB */
+        .card-ez {
+            border: 1.5px solid #ff2a2a;
+        }
+
+        .card-ez .card-title {
+            color: #ff2a2a;
+        }
+
+        .card-ez .btn-copy {
+            background: linear-gradient(90deg, #ff2a2a, #cc0000);
+            color: #ffffff;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .card-desc {
+            color: #b0b0bc;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .btn-copy {
+            width: 100%;
+            padding: 12px;
             border: none;
-            font-weight: bold;
-            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-copy:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #22222d;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <!-- NICE HUB MAIN FRAME -->
-    <div id="nice-hub">
-        <div class="top-bar">
-            <span class="title">Nice Hub—99 nights,fixlag—all</span>
-            <div style="display: flex; align-items: center;">
-                <div class="tab-container">
-                    <button class="tab-btn active" onclick="openTab('Items', this)">Items</button>
-                    <button class="tab-btn" onclick="openTab('Player', this)">Player</button>
-                    <button class="tab-btn" onclick="openTab('ESP', this)">ESP</button>
-                    <button class="tab-btn" onclick="openTab('Settings', this)">Settings</button>
-                    <!-- TAB EZ HUB MỚI THÊM -->
-                    <button class="tab-btn" onclick="openTab('EzHub', this)">Ez Hub</button>
-                </div>
-                <div class="window-controls">
-                    <button class="btn-control btn-mini" onclick="toggleMinimize()">-</button>
-                    <button class="btn-control btn-close" onclick="showConfirm(true)">X</button>
-                </div>
-            </div>
+    <header>
+        <h1 class="site-title">TIENTRUONGSCRIPT</h1>
+        <p class="site-desc">Kho tổng hợp Script Roblox mượt mà & tối ưu nhất</p>
+    </header>
+
+    <div class="container">
+
+        <!-- CARD 1: NICE HUB -->
+        <div class="card card-nice">
+            <h2 class="card-title">Nice Hub—99 nights,fixlag—all (Full Menu)</h2>
+            <p class="card-desc">
+                Menu đa năng với tính năng Đánh quái tự do, Fast Hit, ESP Rương & Trẻ em, Tùy chỉnh WalkSpeed, JumpPower...
+            </p>
+            <button class="btn-copy" onclick="copyScript(niceHubScript, 'Đã sao chép Nice Hub Script!')">
+                Copy Nice Hub Script
+            </button>
         </div>
 
-        <div class="content-container">
-            <div id="Items" class="tab-page active">
-                <button class="btn-item">⚡ LÃNH ĐỊA: ĐÁNH QUÁI TỪ XA [TẮT]</button>
-                <button class="btn-item">⚡ TỰ ĐỘNG HIT + SIÊU TỐC ĐỘ (AUTO HIT FIX) [TẮT]</button>
-            </div>
-            <div id="Player" class="tab-page">
-                <p style="padding: 10px; color: #b4b4b4;">Cấu hình tốc độ di chuyển & độ cao nhảy...</p>
-            </div>
-            <div id="ESP" class="tab-page">
-                <button class="btn-item">📦 ESP RƯƠNG [TẮT]</button>
-                <button class="btn-item">👶 ESP 4 ĐỨA TRẺ [TẮT]</button>
-            </div>
-            <div id="Settings" class="tab-page">
-                <p style="padding: 10px; color: #b4b4b4;">🌐 Cấu hình Ngôn ngữ / Language</p>
-            </div>
-            
-            <!-- NỘI DUNG TAB EZ HUB -->
-            <div id="EzHub" class="tab-page">
-                <h4 style="color: #ffd700; margin-bottom: 5px;">Ez Hub—all (Recommended for first-person shooter games)</h4>
-                <p style="color: #b4b4b4; font-size: 13px; margin-bottom: 12px;">
-                    Khuyến nghị dành cho các tựa game bắn súng góc nhìn thứ nhất (FPS).
-                </p>
-                <button class="btn-item" onclick="toggleEzHubMenu()" style="background-color: #8232ca; color: white;">
-                    ⚡ Mở / Bật Menu Ez Hub
-                </button>
-            </div>
+        <!-- CARD 2: MENU FIX LAG -->
+        <div class="card card-fixlag">
+            <h2 class="card-title">MENU FIX LAG (SIÊU NHẸ)</h2>
+            <p class="card-desc">
+                Tối ưu đồ họa Potato Graphics, xóa hiệu ứng hạt, tắt bóng đổ, làm mượt Terrain giúp giảm giật lag tối đa cho máy yếu.
+            </p>
+            <button class="btn-copy" onclick="copyScript(fixLagScript, 'Đã sao chép Fix Lag Script!')">
+                Copy Fix Lag Script
+            </button>
         </div>
 
-        <!-- Confirm Modal Close -->
-        <div id="confirm-box" class="confirm-modal">
-            <p>Bạn có chắc chắn muốn thoát không?</p>
-            <div class="confirm-btns">
-                <button style="background-color: #b42828;" onclick="closeNiceHub()">Có</button>
-                <button style="background-color: #3c3c41;" onclick="showConfirm(false)">Không</button>
-            </div>
+        <!-- CARD 3: EZ HUB -->
+        <div class="card card-ez">
+            <h2 class="card-title">EZ HUB (Full Menu)</h2>
+            <p class="card-desc">
+                Menu HUD bắn súng FPS linh hoạt với Energy Bar, TP Click, Jump Super, Shift Lock, Fling, Nằm/Ngồi và khóa vị trí nút bấm.
+            </p>
+            <button class="btn-copy" onclick="copyScript(ezHubScript, 'Đã sao chép Ez Hub Script!')">
+                Copy Ez Hub Script
+            </button>
         </div>
+
     </div>
 
-    <!-- EZ HUB MENU MAIN -->
-    <div id="ez-hub-menu">
-        <div class="top-bar">
-            <span class="title">ez hub</span>
-            <button class="btn-control btn-close" onclick="toggleEzHubMenu()">X</button>
-        </div>
-        <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px;">
-            <button class="btn-item" style="background-color: #b41e1e; text-align: center;">HIỆN TẤT CẢ NÚT [ON]</button>
-            <button class="btn-item" style="background-color: #0098c8; text-align: center;">🟢 MỞ KHÓA VỊ TRÍ</button>
-        </div>
-    </div>
-
-    <!-- LOGO BÓNG BÓNG R (EZ HUB) -->
-    <div id="bubble-btn" onclick="toggleEzHubMenu()">
-        <span class="logo-text">ez hub</span>
-        <span class="logo-r">R</span>
-    </div>
+    <div id="toast" class="toast">Đã sao chép script!</div>
 
     <script>
-        function openTab(tabName, element) {
-            let pages = document.getElementsByClassName("tab-page");
-            for (let page of pages) {
-                page.classList.remove("active");
-            }
+        // SCRIPT 1: NICE HUB
+        const niceHubScript = `loadstring(game:HttpGet("https://raw.githubusercontent.com/redkaideptrai-bit/mycsript/main/nicehub.lua"))()`;
 
-            let btns = document.getElementsByClassName("tab-btn");
-            for (let btn of btns) {
-                btn.classList.remove("active");
-            }
+        // SCRIPT 2: FIX LAG
+        const fixLagScript = `loadstring(game:HttpGet("https://raw.githubusercontent.com/redkaideptrai-bit/mycsript/main/fixlag.lua"))()`;
 
-            document.getElementById(tabName).classList.add("active");
-            element.classList.add("active");
+        // SCRIPT 3: EZ HUB
+        const ezHubScript = `local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local Mouse = LocalPlayer:GetMouse()
+
+pcall(function()
+    if CoreGui:FindFirstChild("KaiActionHUD_UI") then CoreGui.KaiActionHUD_UI:Destroy() end
+    if PlayerGui:FindFirstChild("KaiActionHUD_UI") then PlayerGui.KaiActionHUD_UI:Destroy() end
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "KaiActionHUD_UI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local successParent = pcall(function() ScreenGui.Parent = CoreGui end)
+if not successParent then ScreenGui.Parent = PlayerGui end
+
+local isUILocked = false 
+local isHUDVisible = true
+
+local modeTP = false
+local isLaying = false
+local isSitting = false
+local isShiftLock = false
+local isAutoFlingEnabled = false 
+local isSpeedEnabled = false
+
+local maxEnergy = 100
+local currentEnergy = 100
+local normalSpeed = 16
+local speedMultiplier = 10
+local energyDrainRate = 100 / 3600
+
+local function makeIndependentDraggable(frame)
+    local dragging = false
+    local dragInput, dragStart, startPos
+
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+            if not isUILocked or frame.Name == "MainFrame" or frame.Name == "BubbleBtn" then
+                dragging = true
+                dragStart = input.Position
+                startPos = frame.Position
+
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(
+                startPos.X.Scale, 
+                startPos.X.Offset + delta.X, 
+                startPos.Y.Scale, 
+                startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
+
+local EnergyContainer = Instance.new("Frame")
+EnergyContainer.Name = "EnergyContainer"
+EnergyContainer.Size = UDim2.new(0, 160, 0, 22)
+EnergyContainer.Position = UDim2.new(0.1, 0, 0.45, 0)
+EnergyContainer.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+EnergyContainer.BorderSizePixel = 0
+EnergyContainer.Active = true
+EnergyContainer.ZIndex = 10
+EnergyContainer.Parent = ScreenGui
+
+local EnergyCorner = Instance.new("UICorner")
+EnergyCorner.CornerRadius = UDim.new(0, 6)
+EnergyCorner.Parent = EnergyContainer
+
+local EnergyStroke = Instance.new("UIStroke")
+EnergyStroke.Name = "UIStroke"
+EnergyStroke.Thickness = 1.5
+EnergyStroke.Color = Color3.fromRGB(0, 200, 255)
+EnergyStroke.Parent = EnergyContainer
+
+local EnergyBar = Instance.new("Frame")
+EnergyBar.Size = UDim2.new(1, 0, 1, 0)
+EnergyBar.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+EnergyBar.BorderSizePixel = 0
+EnergyBar.Parent = EnergyContainer
+
+local BarCorner = Instance.new("UICorner")
+BarCorner.CornerRadius = UDim.new(0, 6)
+BarCorner.Parent = EnergyBar
+
+local EnergyText = Instance.new("TextLabel")
+EnergyText.Size = UDim2.new(1, 0, 1, 0)
+EnergyText.BackgroundTransparency = 1
+EnergyText.Text = "ENERGY: 100%"
+EnergyText.TextColor3 = Color3.fromRGB(255, 255, 255)
+EnergyText.Font = Enum.Font.SourceSansBold
+EnergyText.TextSize = 12
+EnergyText.ZIndex = 11
+EnergyText.Parent = EnergyContainer
+
+makeIndependentDraggable(EnergyContainer)
+
+local function updateEnergyUI()
+    local ratio = math.clamp(currentEnergy / maxEnergy, 0, 1)
+    EnergyBar.Size = UDim2.new(ratio, 0, 1, 0)
+    EnergyText.Text = "ENERGY: " .. math.floor(currentEnergy) .. "%"
+end
+
+task.spawn(function()
+    while task.wait(1) do
+        local char = LocalPlayer.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        local isMoving = hum and hum.MoveDirection.Magnitude > 0
+
+        if isSpeedEnabled and isMoving then
+            currentEnergy = math.max(0, currentEnergy - energyDrainRate)
+            if currentEnergy <= 0 then
+                isSpeedEnabled = false
+                if hum then hum.WalkSpeed = normalSpeed end
+            end
+        else
+            if currentEnergy < maxEnergy then
+                currentEnergy = math.min(maxEnergy, currentEnergy + 1)
+            end
+        end
+        
+        if hum then
+            if isSpeedEnabled and currentEnergy > 0 then
+                hum.WalkSpeed = normalSpeed * speedMultiplier
+            elseif not isSpeedEnabled then
+                hum.WalkSpeed = normalSpeed
+            end
+        end
+
+        updateEnergyUI()
+    end
+end)
+
+local allButtons = {}
+
+local function createSingleButton(name, text, defaultPos)
+    local btn = Instance.new("TextButton")
+    btn.Name = "Btn_" .. name
+    btn.Size = UDim2.new(0, 42, 0, 42)
+    btn.Position = defaultPos
+    btn.Text = text
+    btn.BackgroundColor3 = Color3.fromRGB(25, 25, 32)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 13
+    btn.Active = true
+    btn.ZIndex = 10
+    btn.Parent = ScreenGui
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 8)
+    corner.Parent = btn
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Name = "UIStroke"
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.fromRGB(0, 200, 255)
+    stroke.Parent = btn
+
+    makeIndependentDraggable(btn)
+    table.insert(allButtons, btn)
+    return btn
+end
+
+local BtnTP  = createSingleButton("TP",  "TP",  UDim2.new(0.10, 0, 0.55, 0))
+local BtnAJ  = createSingleButton("AJ",  "AJ",  UDim2.new(0.18, 0, 0.55, 0))
+local BtnSL  = createSingleButton("SL",  "SL",  UDim2.new(0.26, 0, 0.55, 0))
+local BtnL   = createSingleButton("L",   "L",   UDim2.new(0.34, 0, 0.55, 0))
+local BtnS   = createSingleButton("S",   "S",   UDim2.new(0.42, 0, 0.55, 0))
+local BtnFL  = createSingleButton("FL",  "FL",  UDim2.new(0.50, 0, 0.55, 0))
+local BtnSPD = createSingleButton("SPD", "SPD", UDim2.new(0.58, 0, 0.55, 0))
+
+local BubbleBtn = Instance.new("TextButton")
+BubbleBtn.Name = "BubbleBtn"
+BubbleBtn.Size = UDim2.new(0, 60, 0, 60)
+BubbleBtn.Position = UDim2.new(0.05, 0, 0.2, 0)
+BubbleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+BubbleBtn.Text = ""
+BubbleBtn.Visible = true
+BubbleBtn.Active = true
+BubbleBtn.ZIndex = 100
+BubbleBtn.ClipsDescendants = true
+BubbleBtn.Parent = ScreenGui
+
+local BubbleCorner = Instance.new("UICorner")
+BubbleCorner.CornerRadius = UDim.new(1, 0)
+BubbleCorner.Parent = BubbleBtn
+
+local BubbleStroke = Instance.new("UIStroke")
+BubbleStroke.Thickness = 3.5
+BubbleStroke.Color = Color3.fromRGB(220, 30, 30)
+BubbleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+BubbleStroke.Parent = BubbleBtn
+
+local DiamondFrame = Instance.new("Frame")
+DiamondFrame.Size = UDim2.new(0, 30, 0, 30)
+DiamondFrame.Position = UDim2.new(0.5, -15, 0.5, -15)
+DiamondFrame.BackgroundTransparency = 1
+DiamondFrame.Rotation = 45
+DiamondFrame.ZIndex = 101
+DiamondFrame.Parent = BubbleBtn
+
+local DiamondStroke = Instance.new("UIStroke")
+DiamondStroke.Thickness = 1.5
+DiamondStroke.Color = Color3.fromRGB(255, 255, 255)
+DiamondStroke.Transparency = 0.25
+DiamondStroke.Parent = DiamondFrame
+
+local EzHubLabel = Instance.new("TextLabel")
+EzHubLabel.Size = UDim2.new(0, 45, 0, 10)
+EzHubLabel.Position = UDim2.new(0.5, -22, 0.5, -22)
+EzHubLabel.Text = "ez hub"
+EzHubLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+EzHubLabel.Font = Enum.Font.SourceSansBold
+EzHubLabel.TextSize = 9
+EzHubLabel.Rotation = -45
+EzHubLabel.BackgroundTransparency = 1
+EzHubLabel.ZIndex = 104
+EzHubLabel.Parent = BubbleBtn
+
+local LogoR = Instance.new("TextLabel")
+LogoR.Size = UDim2.new(1, 0, 1, 0)
+LogoR.Position = UDim2.new(0, 0, 0, -1)
+LogoR.Text = "R"
+LogoR.TextColor3 = Color3.fromRGB(255, 30, 30)
+LogoR.Font = Enum.Font.FredokaOne
+LogoR.TextSize = 32
+LogoR.BackgroundTransparency = 1
+LogoR.ZIndex = 103
+LogoR.Parent = BubbleBtn
+
+local LogoRShadow = Instance.new("TextLabel")
+LogoRShadow.Size = UDim2.new(1, 0, 1, 0)
+LogoRShadow.Position = UDim2.new(0, 2, 0, 1)
+LogoRShadow.Text = "R"
+LogoRShadow.TextColor3 = Color3.fromRGB(110, 0, 0)
+LogoRShadow.Font = Enum.Font.FredokaOne
+LogoRShadow.TextSize = 32
+LogoRShadow.BackgroundTransparency = 1
+LogoRShadow.ZIndex = 102
+LogoRShadow.Parent = BubbleBtn
+
+makeIndependentDraggable(BubbleBtn)
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 260, 0, 180)
+MainFrame.Position = UDim2.new(0.5, -130, 0.2, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Visible = true
+MainFrame.ZIndex = 50
+MainFrame.Parent = ScreenGui
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 10)
+MainCorner.Parent = MainFrame
+
+local MainStroke = Instance.new("UIStroke")
+MainStroke.Thickness = 2
+MainStroke.Color = Color3.fromRGB(200, 30, 30)
+MainStroke.Parent = MainFrame
+
+makeIndependentDraggable(MainFrame)
+
+local TopBar = Instance.new("Frame")
+TopBar.Size = UDim2.new(1, 0, 0, 38)
+TopBar.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
+TopBar.BorderSizePixel = 0
+TopBar.ZIndex = 51
+TopBar.Parent = MainFrame
+
+local TopBarCorner = Instance.new("UICorner")
+TopBarCorner.CornerRadius = UDim.new(0, 10)
+TopBarCorner.Parent = TopBar
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -80, 1, 0)
+Title.Position = UDim2.new(0, 15, 0, 0)
+Title.Text = "ez hub"
+Title.TextColor3 = Color3.fromRGB(240, 240, 240)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 16
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.BackgroundTransparency = 1
+Title.ZIndex = 52
+Title.Parent = TopBar
+
+local MiniBtn = Instance.new("TextButton")
+MiniBtn.Size = UDim2.new(0, 32, 0, 32)
+MiniBtn.Position = UDim2.new(1, -65, 0, 3)
+MiniBtn.Text = "-"
+MiniBtn.Font = Enum.Font.SourceSansBold
+MiniBtn.TextSize = 24
+MiniBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+MiniBtn.BackgroundTransparency = 1
+MiniBtn.ZIndex = 52
+MiniBtn.Parent = TopBar
+
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 32, 0, 32)
+CloseBtn.Position = UDim2.new(1, -32, 0, 3)
+CloseBtn.Text = "X"
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.TextSize = 16
+CloseBtn.TextColor3 = Color3.fromRGB(255, 60, 60)
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.ZIndex = 52
+CloseBtn.Parent = TopBar
+
+local ToggleHUDBtn = Instance.new("TextButton")
+ToggleHUDBtn.Size = UDim2.new(1, -30, 0, 38)
+ToggleHUDBtn.Position = UDim2.new(0, 15, 0, 50)
+ToggleHUDBtn.Text = "HIỆN TẤT CẢ NÚT [ON]"
+ToggleHUDBtn.BackgroundColor3 = Color3.fromRGB(180, 30, 30)
+ToggleHUDBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleHUDBtn.Font = Enum.Font.SourceSansBold
+ToggleHUDBtn.TextSize = 13
+ToggleHUDBtn.ZIndex = 52
+ToggleHUDBtn.Parent = MainFrame
+
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(0, 8)
+ToggleCorner.Parent = ToggleHUDBtn
+
+local LockToggleBtn = Instance.new("TextButton")
+LockToggleBtn.Size = UDim2.new(1, -30, 0, 38)
+LockToggleBtn.Position = UDim2.new(0, 15, 0, 100)
+LockToggleBtn.Text = "🟢 MỞ KHÓA VỊ TRÍ (ĐANG CHO KÉO)"
+LockToggleBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 200)
+LockToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+LockToggleBtn.Font = Enum.Font.SourceSansBold
+LockToggleBtn.TextSize = 13
+LockToggleBtn.ZIndex = 52
+LockToggleBtn.Parent = MainFrame
+
+local LockCorner = Instance.new("UICorner")
+LockCorner.CornerRadius = UDim.new(0, 8)
+LockCorner.Parent = LockToggleBtn
+
+local function updateLockVisuals()
+    local color = isUILocked and Color3.fromRGB(60, 60, 75) or Color3.fromRGB(0, 200, 255)
+    
+    local energyStroke = EnergyContainer:FindFirstChild("UIStroke")
+    if energyStroke then energyStroke.Color = color end
+
+    for _, btn in ipairs(allButtons) do
+        local stroke = btn:FindFirstChild("UIStroke")
+        if stroke then stroke.Color = color end
+    end
+end
+updateLockVisuals()
+
+LockToggleBtn.MouseButton1Click:Connect(function()
+    isUILocked = not isUILocked
+    if isUILocked then
+        LockToggleBtn.Text = "🔴 ĐÃ KHÓA VỊ TRÍ (ĐANG DÙNG)"
+        LockToggleBtn.BackgroundColor3 = Color3.fromRGB(120, 20, 20)
+    else
+        LockToggleBtn.Text = "🟢 MỞ KHÓA VỊ TRÍ (ĐANG CHO KÉO)"
+        LockToggleBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 200)
+    end
+    updateLockVisuals()
+end)
+
+ToggleHUDBtn.MouseButton1Click:Connect(function()
+    isHUDVisible = not isHUDVisible
+    EnergyContainer.Visible = isHUDVisible
+    for _, btn in ipairs(allButtons) do
+        btn.Visible = isHUDVisible
+    end
+    
+    if isHUDVisible then
+        ToggleHUDBtn.Text = "HIỆN TẤT CẢ NÚT [ON]"
+        ToggleHUDBtn.BackgroundColor3 = Color3.fromRGB(180, 30, 30)
+    else
+        ToggleHUDBtn.Text = "ẨN TẤT CẢ NÚT [OFF]"
+        ToggleHUDBtn.BackgroundColor3 = Color3.fromRGB(60, 20, 20)
+    end
+end)
+
+BubbleBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+end)
+
+MiniBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+end)
+
+local ConfirmFrame = Instance.new("Frame")
+ConfirmFrame.Size = UDim2.new(1, 0, 1, 0)
+ConfirmFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
+ConfirmFrame.BackgroundTransparency = 0.05
+ConfirmFrame.Visible = false
+ConfirmFrame.ZIndex = 60
+ConfirmFrame.Parent = MainFrame
+
+local ConfirmCorner = Instance.new("UICorner")
+ConfirmCorner.CornerRadius = UDim.new(0, 10)
+ConfirmCorner.Parent = ConfirmFrame
+
+local ConfirmText = Instance.new("TextLabel")
+ConfirmText.Size = UDim2.new(1, -20, 0, 45)
+ConfirmText.Position = UDim2.new(0, 10, 0, 20)
+ConfirmText.Text = "Bạn chắc chứ?"
+ConfirmText.TextColor3 = Color3.fromRGB(255, 255, 255)
+ConfirmText.Font = Enum.Font.SourceSansBold
+ConfirmText.TextSize = 18
+ConfirmText.ZIndex = 61
+ConfirmText.BackgroundTransparency = 1
+ConfirmText.Parent = ConfirmFrame
+
+local YesBtn = Instance.new("TextButton")
+YesBtn.Size = UDim2.new(0, 85, 0, 35)
+YesBtn.Position = UDim2.new(0.1, 0, 0.55, 0)
+YesBtn.Text = "Có"
+YesBtn.BackgroundColor3 = Color3.fromRGB(200, 30, 30)
+YesBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+YesBtn.Font = Enum.Font.SourceSansBold
+YesBtn.TextSize = 16
+YesBtn.ZIndex = 61
+YesBtn.Parent = ConfirmFrame
+
+local YesCorner = Instance.new("UICorner")
+YesCorner.CornerRadius = UDim.new(0, 6)
+YesCorner.Parent = YesBtn
+
+local NoBtn = Instance.new("TextButton")
+NoBtn.Size = UDim2.new(0, 85, 0, 35)
+NoBtn.Position = UDim2.new(0.55, 0, 0.55, 0)
+NoBtn.Text = "Không"
+NoBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+NoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoBtn.Font = Enum.Font.SourceSansBold
+NoBtn.TextSize = 16
+NoBtn.ZIndex = 61
+NoBtn.Parent = ConfirmFrame
+
+local NoCorner = Instance.new("UICorner")
+NoCorner.CornerRadius = UDim.new(0, 6)
+NoCorner.Parent = NoBtn
+
+CloseBtn.MouseButton1Click:Connect(function() ConfirmFrame.Visible = true end)
+NoBtn.MouseButton1Click:Connect(function() ConfirmFrame.Visible = false end)
+YesBtn.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
+
+BtnSPD.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    if currentEnergy <= 0 then return end
+    isSpeedEnabled = not isSpeedEnabled
+    BtnSPD.BackgroundColor3 = isSpeedEnabled and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+end)
+
+BtnFL.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    isAutoFlingEnabled = not isAutoFlingEnabled
+    BtnFL.BackgroundColor3 = isAutoFlingEnabled and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+end)
+
+local function checkNearbyPlayer(myHrp)
+    local hitDistance = 7
+    for _, otherPlayer in ipairs(Players:GetPlayers()) do
+        if otherPlayer ~= LocalPlayer and otherPlayer.Character then
+            local otherHrp = otherPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if otherHrp then
+                local dist = (myHrp.Position - otherHrp.Position).Magnitude
+                if dist <= hitDistance then return true end
+            end
+        end
+    end
+    return false
+end
+
+RunService.RenderStepped:Connect(function()
+    local char = LocalPlayer.Character
+    if not char then return end
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    if isShiftLock then
+        local camera = Workspace.CurrentCamera
+        local _, y = camera.CFrame:ToEulerAnglesYXZ()
+        hrp.CFrame = CFrame.new(hrp.Position) * CFrame.Angles(0, y, 0)
+    end
+
+    if isAutoFlingEnabled then
+        if checkNearbyPlayer(hrp) then
+            hrp.Velocity = Vector3.new(0, 0, 0)
+            hrp.RotVelocity = Vector3.new(0, 1500, 0)
+        else
+            hrp.RotVelocity = Vector3.new(0, 0, 0)
+        end
+    end
+end)
+
+RunService.Stepped:Connect(function()
+    if isAutoFlingEnabled then
+        local char = LocalPlayer.Character
+        if char then
+            for _, child in ipairs(char:GetDescendants()) do
+                if child:IsA("BasePart") then child.CanCollide = false end
+            end
+        end
+    end
+end)
+
+BtnAJ.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    local char = LocalPlayer.Character
+    if char and char:FindFirstChild("HumanoidRootPart") then
+        char.HumanoidRootPart.Velocity = Vector3.new(char.HumanoidRootPart.Velocity.X, 50, char.HumanoidRootPart.Velocity.Z)
+    end
+end)
+
+BtnSL.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    isShiftLock = not isShiftLock
+    BtnSL.BackgroundColor3 = isShiftLock and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+    UserInputService.MouseBehavior = isShiftLock and Enum.MouseBehavior.LockCenter or Enum.MouseBehavior.Default
+end)
+
+BtnTP.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    modeTP = not modeTP
+    BtnTP.BackgroundColor3 = modeTP and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+end)
+
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if gpe then return end
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if modeTP then
+            local char = LocalPlayer.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                local targetCFrame = Mouse.Hit
+                if targetCFrame then
+                    char.HumanoidRootPart.CFrame = targetCFrame + Vector3.new(0, 3, 0)
+                    modeTP = false
+                    BtnTP.BackgroundColor3 = Color3.fromRGB(25, 25, 32)
+                end
+            end
+        end
+    end
+end)
+
+BtnL.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    isLaying = not isLaying
+    isSitting = false
+    BtnS.BackgroundColor3 = Color3.fromRGB(25, 25, 32)
+    BtnL.BackgroundColor3 = isLaying and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+end)
+
+BtnS.MouseButton1Click:Connect(function()
+    if not isUILocked then return end
+    isSitting = not isSitting
+    isLaying = false
+    BtnL.BackgroundColor3 = Color3.fromRGB(25, 25, 32)
+    BtnS.BackgroundColor3 = isSitting and Color3.fromRGB(200, 30, 30) or Color3.fromRGB(25, 25, 32)
+end)
+
+RunService.RenderStepped:Connect(function()
+    local char = LocalPlayer.Character
+    if char then
+        if isLaying and char:FindFirstChild("HumanoidRootPart") then
+            char.HumanoidRootPart.CFrame = char.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+        elseif isSitting and char:FindFirstChildOfClass("Humanoid") then
+            char:FindFirstChildOfClass("Humanoid").Sit = true
+        end
+    end
+end)`;
+
+        function copyScript(text, msg) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(msg);
+            }).catch(err => {
+                showToast("Lỗi khi sao chép!");
+            });
         }
 
-        function toggleEzHubMenu() {
-            let ezMenu = document.getElementById("ez-hub-menu");
-            if (ezMenu.style.display === "flex") {
-                ezMenu.style.display = "none";
-            } else {
-                ezMenu.style.display = "flex";
-            }
-        }
-
-        let isMinimized = false;
-        function toggleMinimize() {
-            let hub = document.getElementById("nice-hub");
-            let container = hub.querySelector(".content-container");
-            isMinimized = !isMinimized;
-            
-            if (isMinimized) {
-                container.style.display = "none";
-                hub.style.height = "35px";
-            } else {
-                container.style.display = "block";
-                hub.style.height = "380px";
-            }
-        }
-
-        function showConfirm(show) {
-            document.getElementById("confirm-box").style.display = show ? "block" : "none";
-        }
-
-        function closeNiceHub() {
-            document.getElementById("nice-hub").style.display = "none";
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2000);
         }
     </script>
 </body>
 </html>
+
