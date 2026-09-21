@@ -1,916 +1,336 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TienTruongscript - Official Website</title>
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121216; color: #fff; margin: 0; padding: 20px; text-align: center; }
-    h1 { color: #ff4757; margin-top: 20px; font-size: 32px; text-transform: uppercase; letter-spacing: 1px; }
-    p.subtitle { color: #aaa; margin-bottom: 30px; }
-    .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 0 auto; }
-    .card { background: #1e1e24; padding: 25px; border-radius: 12px; border: 1px solid #8232c8; box-shadow: 0 4px 15px rgba(0,0,0,0.6); flex: 1 1 450px; max-width: 500px; text-align: left; box-sizing: border-box; }
-    .card h3 { color: #ff2a75; margin-top: 0; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-    .card p { color: #ccc; font-size: 14px; line-height: 1.5; }
-    .btn { background: #8232c8; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 15px; transition: 0.2s; width: 100%; }
-    .btn:hover { background: #9b42e6; }
-    .btn:active { transform: scale(0.98); }
-    .btn-fixlag { background: #008cff; }
-    .btn-fixlag:hover { background: #00a2ff; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nice Hub & Ez Hub Web UI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: #121214;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* NICE HUB MAIN FRAME */
+        #nice-hub {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 560px;
+            height: 380px;
+            background-color: #141418;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .top-bar {
+            height: 35px;
+            background-color: #0c0c0f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            cursor: move;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .btn-control {
+            width: 35px;
+            height: 35px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-mini { background-color: #2d2d32; }
+        .btn-close { background-color: #b42828; }
+
+        .tab-container {
+            display: flex;
+            gap: 4px;
+            margin-right: 10px;
+        }
+
+        .tab-btn {
+            background-color: #19191e;
+            color: #b4b4b4;
+            border: none;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background-color: #8232ca;
+            color: #fff;
+        }
+
+        .content-container {
+            padding: 10px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tab-page {
+            display: none;
+        }
+
+        .tab-page.active {
+            display: block;
+        }
+
+        .btn-item {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            background-color: #202028;
+            border: none;
+            color: #e6e6e6;
+            text-align: left;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-item:hover {
+            background-color: #2a2a35;
+        }
+
+        /* EZ HUB MENU FRAME */
+        #ez-hub-menu {
+            position: absolute;
+            top: 100px;
+            left: 650px;
+            width: 260px;
+            height: 180px;
+            background-color: #121216;
+            border: 2px solid #c81e1e;
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            z-index: 20;
+        }
+
+        /* BUBBLE LOGO R */
+        #bubble-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #0f0f0f;
+            border: 3.5px solid #dc1e1e;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .logo-r {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff1e1e;
+            text-shadow: 2px 1px #6e0000;
+            position: relative;
+        }
+
+        .logo-text {
+            position: absolute;
+            font-size: 9px;
+            font-weight: bold;
+            color: #fff;
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+
+        /* MODAL CONFIRM */
+        .confirm-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            background-color: #1e1e23;
+            border: 2px solid #b42828;
+            padding: 15px;
+            text-align: center;
+            display: none;
+            z-index: 30;
+        }
+
+        .confirm-btns {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .confirm-btns button {
+            padding: 6px 20px;
+            border: none;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>TienTruongscript</h1>
-  <p class="subtitle">Kho tổng hợp Script Roblox mượt mà & tối ưu nhất</p>
+    <!-- NICE HUB MAIN FRAME -->
+    <div id="nice-hub">
+        <div class="top-bar">
+            <span class="title">Nice Hub—99 nights,fixlag—all</span>
+            <div style="display: flex; align-items: center;">
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="openTab('Items', this)">Items</button>
+                    <button class="tab-btn" onclick="openTab('Player', this)">Player</button>
+                    <button class="tab-btn" onclick="openTab('ESP', this)">ESP</button>
+                    <button class="tab-btn" onclick="openTab('Settings', this)">Settings</button>
+                    <!-- TAB EZ HUB MỚI THÊM -->
+                    <button class="tab-btn" onclick="openTab('EzHub', this)">Ez Hub</button>
+                </div>
+                <div class="window-controls">
+                    <button class="btn-control btn-mini" onclick="toggleMinimize()">-</button>
+                    <button class="btn-control btn-close" onclick="showConfirm(true)">X</button>
+                </div>
+            </div>
+        </div>
 
-  <div class="container">
-    <!-- Ô 1: TSOG HUB -->
-    <div class="card">
-      <h3>TSOG HUB (Full Menu)</h3>
-      <p>Menu đa năng với tính năng Đánh quái tự do, Fast Hit, ESP Rương & Trẻ em, Tùy chỉnh WalkSpeed, JumpPower...</p>
-      <button class="btn" onclick="copyTSOG()">Copy TSOG HUB Script</button>
+        <div class="content-container">
+            <div id="Items" class="tab-page active">
+                <button class="btn-item">⚡ LÃNH ĐỊA: ĐÁNH QUÁI TỪ XA [TẮT]</button>
+                <button class="btn-item">⚡ TỰ ĐỘNG HIT + SIÊU TỐC ĐỘ (AUTO HIT FIX) [TẮT]</button>
+            </div>
+            <div id="Player" class="tab-page">
+                <p style="padding: 10px; color: #b4b4b4;">Cấu hình tốc độ di chuyển & độ cao nhảy...</p>
+            </div>
+            <div id="ESP" class="tab-page">
+                <button class="btn-item">📦 ESP RƯƠNG [TẮT]</button>
+                <button class="btn-item">👶 ESP 4 ĐỨA TRẺ [TẮT]</button>
+            </div>
+            <div id="Settings" class="tab-page">
+                <p style="padding: 10px; color: #b4b4b4;">🌐 Cấu hình Ngôn ngữ / Language</p>
+            </div>
+            
+            <!-- NỘI DUNG TAB EZ HUB -->
+            <div id="EzHub" class="tab-page">
+                <h4 style="color: #ffd700; margin-bottom: 5px;">Ez Hub—all (Recommended for first-person shooter games)</h4>
+                <p style="color: #b4b4b4; font-size: 13px; margin-bottom: 12px;">
+                    Khuyến nghị dành cho các tựa game bắn súng góc nhìn thứ nhất (FPS).
+                </p>
+                <button class="btn-item" onclick="toggleEzHubMenu()" style="background-color: #8232ca; color: white;">
+                    ⚡ Mở / Bật Menu Ez Hub
+                </button>
+            </div>
+        </div>
+
+        <!-- Confirm Modal Close -->
+        <div id="confirm-box" class="confirm-modal">
+            <p>Bạn có chắc chắn muốn thoát không?</p>
+            <div class="confirm-btns">
+                <button style="background-color: #b42828;" onclick="closeNiceHub()">Có</button>
+                <button style="background-color: #3c3c41;" onclick="showConfirm(false)">Không</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Ô 2: FIX LAG (MỚI THÊM) -->
-    <div class="card" style="border-color: #008cff;">
-      <h3 style="color: #008cff;">MENU FIX LAG (SIÊU NHẸ)</h3>
-      <p>Tối ưu đồ họa Potato Graphics, xóa hiệu ứng hạt, tắt bóng đổ, làm mượt Terrain giúp giảm giật lag tối đa cho máy yếu.</p>
-      <button class="btn btn-fixlag" onclick="copyFixLag()">Copy Fix Lag Script</button>
+    <!-- EZ HUB MENU MAIN -->
+    <div id="ez-hub-menu">
+        <div class="top-bar">
+            <span class="title">ez hub</span>
+            <button class="btn-control btn-close" onclick="toggleEzHubMenu()">X</button>
+        </div>
+        <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-item" style="background-color: #b41e1e; text-align: center;">HIỆN TẤT CẢ NÚT [ON]</button>
+            <button class="btn-item" style="background-color: #0098c8; text-align: center;">🟢 MỞ KHÓA VỊ TRÍ</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // 1. Mã Script TSOG HUB
-    const tsogScriptCode = `local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local TopBar = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local CloseBtn = Instance.new("TextButton")
-local MiniBtn = Instance.new("TextButton")
+    <!-- LOGO BÓNG BÓNG R (EZ HUB) -->
+    <div id="bubble-btn" onclick="toggleEzHubMenu()">
+        <span class="logo-text">ez hub</span>
+        <span class="logo-r">R</span>
+    </div>
 
-local TabContainer = Instance.new("Frame")
-local TabListLayout = Instance.new("UIListLayout")
-local ContentContainer = Instance.new("Frame")
+    <script>
+        function openTab(tabName, element) {
+            let pages = document.getElementsByClassName("tab-page");
+            for (let page of pages) {
+                page.classList.remove("active");
+            }
 
--- Hộp thoại xác nhận thoát
-local ConfirmFrame = Instance.new("Frame")
-local ConfirmTitle = Instance.new("TextLabel")
-local ConfirmYes = Instance.new("TextButton")
-local ConfirmNo = Instance.new("TextButton")
+            let btns = document.getElementsByClassName("tab-btn");
+            for (let btn of btns) {
+                btn.classList.remove("active");
+            }
 
-ScreenGui.Parent = game:GetService("CoreGui") or game.Players.LocalPlayer.PlayerGui
-
--- Frame Chính
-MainFrame.Size = UDim2.new(0, 520, 0, 380)
-MainFrame.Position = UDim2.new(0.3, 0, 0.22, 0)
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
-MainFrame.BorderSizePixel = 0
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Parent = ScreenGui
-
--- Top Bar
-TopBar.Size = UDim2.new(1, 0, 0, 35)
-TopBar.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
-TopBar.BorderSizePixel = 0
-TopBar.Parent = MainFrame
-
-Title.Size = UDim2.new(0, 150, 1, 0)
-Title.Position = UDim2.new(0, 10, 0, 0)
-Title.Text = "TSOG HUB"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextXAlignment = Enum.TextXAlignment.Left
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 18
-Title.BackgroundTransparency = 1
-Title.Parent = TopBar
-
-CloseBtn.Size = UDim2.new(0, 35, 1, 0)
-CloseBtn.Position = UDim2.new(1, -35, 0, 0)
-CloseBtn.Text = "X"
-CloseBtn.Font = Enum.Font.SourceSansBold
-CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
-CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-CloseBtn.BorderSizePixel = 0
-CloseBtn.Parent = TopBar
-
-MiniBtn.Size = UDim2.new(0, 35, 1, 0)
-MiniBtn.Position = UDim2.new(1, -70, 0, 0)
-MiniBtn.Text = "-"
-MiniBtn.Font = Enum.Font.SourceSansBold
-MiniBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
-MiniBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-MiniBtn.BorderSizePixel = 0
-MiniBtn.Parent = TopBar
-
--- Popup xác nhận đóng
-ConfirmFrame.Size = UDim2.new(0, 280, 0, 130)
-ConfirmFrame.Position = UDim2.new(0.5, -140, 0.5, -65)
-ConfirmFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-ConfirmFrame.BorderSizePixel = 2
-ConfirmFrame.BorderColor3 = Color3.fromRGB(180, 40, 40)
-ConfirmFrame.Visible = false
-ConfirmFrame.ZIndex = 20
-ConfirmFrame.Parent = MainFrame
-
-ConfirmTitle.Size = UDim2.new(1, 0, 0, 60)
-ConfirmTitle.Text = "Bạn có chắc chắn muốn thoát không?"
-ConfirmTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-ConfirmTitle.TextWrapped = true
-ConfirmTitle.Font = Enum.Font.SourceSansBold
-ConfirmTitle.TextSize = 16
-ConfirmTitle.BackgroundTransparency = 1
-ConfirmTitle.ZIndex = 21
-ConfirmTitle.Parent = ConfirmFrame
-
-ConfirmYes.Size = UDim2.new(0, 100, 0, 35)
-ConfirmYes.Position = UDim2.new(0.1, 0, 0.6, 0)
-ConfirmYes.Text = "Có"
-ConfirmYes.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
-ConfirmYes.TextColor3 = Color3.fromRGB(255, 255, 255)
-ConfirmYes.Font = Enum.Font.SourceSansBold
-ConfirmYes.ZIndex = 21
-ConfirmYes.Parent = ConfirmFrame
-
-ConfirmNo.Size = UDim2.new(0, 100, 0, 35)
-ConfirmNo.Position = UDim2.new(0.55, 0, 0.6, 0)
-ConfirmNo.Text = "Không"
-ConfirmNo.BackgroundColor3 = Color3.fromRGB(60, 60, 65)
-ConfirmNo.TextColor3 = Color3.fromRGB(255, 255, 255)
-ConfirmNo.Font = Enum.Font.SourceSansBold
-ConfirmNo.ZIndex = 21
-ConfirmNo.Parent = ConfirmFrame
-
-CloseBtn.MouseButton1Click:Connect(function() ConfirmFrame.Visible = true end)
-ConfirmNo.MouseButton1Click:Connect(function() ConfirmFrame.Visible = false end)
-ConfirmYes.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
-
-local isMinimized = false
-MiniBtn.MouseButton1Click:Connect(function()
-    isMinimized = not isMinimized
-    TabContainer.Visible = not isMinimized
-    ContentContainer.Visible = not isMinimized
-    MainFrame.Size = isMinimized and UDim2.new(0, 520, 0, 35) or UDim2.new(0, 520, 0, 380)
-end)
-
--- Tab Bar
-TabContainer.Size = UDim2.new(1, -160, 0, 35)
-TabContainer.Position = UDim2.new(0, 120, 0, 0)
-TabContainer.BackgroundTransparency = 1
-TabContainer.Parent = TopBar
-
-TabListLayout.Parent = TabContainer
-TabListLayout.FillDirection = Enum.FillDirection.Horizontal
-TabListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-TabListLayout.Padding = UDim.new(0, 5)
-
--- Content Frame
-ContentContainer.Size = UDim2.new(1, -20, 1, -50)
-ContentContainer.Position = UDim2.new(0, 10, 0, 42)
-ContentContainer.BackgroundTransparency = 1
-ContentContainer.Parent = MainFrame
-
-local tabs = {}
-local currentLanguage = "VIE"
-
-local function createTab(name)
-    local tabBtn = Instance.new("TextButton")
-    tabBtn.Size = UDim2.new(0, 80, 1, 0)
-    tabBtn.Text = name
-    tabBtn.Font = Enum.Font.SourceSansBold
-    tabBtn.TextSize = 14
-    tabBtn.TextColor3 = Color3.fromRGB(180, 180, 180)
-    tabBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
-    tabBtn.BorderSizePixel = 0
-    tabBtn.Parent = TabContainer
-
-    local pageScroll = Instance.new("ScrollingFrame")
-    pageScroll.Size = UDim2.new(1, 0, 1, 0)
-    pageScroll.BackgroundTransparency = 1
-    pageScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-    pageScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
-    pageScroll.ScrollBarThickness = 4
-    pageScroll.Visible = false
-    pageScroll.Parent = ContentContainer
-
-    local pageLayout = Instance.new("UIListLayout")
-    pageLayout.Parent = pageScroll
-    pageLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    pageLayout.Padding = UDim.new(0, 5)
-
-    tabBtn.MouseButton1Click:Connect(function()
-        for _, t in pairs(tabs) do
-            t.Btn.TextColor3 = Color3.fromRGB(180, 180, 180)
-            t.Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
-            t.Page.Visible = false
-        end
-        tabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        tabBtn.BackgroundColor3 = Color3.fromRGB(130, 50, 200)
-        pageScroll.Visible = true
-    end)
-
-    local tabObj = {Btn = tabBtn, Page = pageScroll}
-    table.insert(tabs, tabObj)
-    return tabObj
-end
-
-local TabItems = createTab("Items")
-local TabPlayer = createTab("Player")
-local TabESP = createTab("ESP")
-local TabSettings = createTab("Settings")
-
-tabs[1].Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-tabs[1].Btn.BackgroundColor3 = Color3.fromRGB(130, 50, 200)
-tabs[1].Page.Visible = true
-
-local function createButton(parent, text, callback)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, -6, 0, 32)
-    btn.Text = "  " .. text
-    btn.TextColor3 = Color3.fromRGB(230, 230, 230)
-    btn.Font = Enum.Font.SourceSansBold
-    btn.TextSize = 14
-    btn.TextXAlignment = Enum.TextXAlignment.Left
-    btn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    btn.BorderSizePixel = 0
-    btn.Parent = parent
-
-    btn.MouseButton1Click:Connect(function() callback(btn) end)
-    return btn
-end
-
-local function createInput(parent, text, defaultVal, callback)
-    local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(1, -6, 0, 35)
-    frame.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    frame.BorderSizePixel = 0
-    frame.Parent = parent
-
-    local lbl = Instance.new("TextLabel")
-    lbl.Size = UDim2.new(0.65, 0, 1, 0)
-    lbl.Position = UDim2.new(0, 10, 0, 0)
-    lbl.Text = text
-    lbl.TextColor3 = Color3.fromRGB(230, 230, 230)
-    lbl.Font = Enum.Font.SourceSansBold
-    lbl.TextSize = 14
-    lbl.TextXAlignment = Enum.TextXAlignment.Left
-    lbl.BackgroundTransparency = 1
-    lbl.Parent = frame
-
-    local box = Instance.new("TextBox")
-    box.Size = UDim2.new(0.3, -10, 0, 25)
-    box.Position = UDim2.new(0.7, 0, 0.15, 0)
-    box.Text = tostring(defaultVal)
-    box.TextColor3 = Color3.fromRGB(255, 255, 255)
-    box.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
-    box.BorderSizePixel = 0
-    box.Font = Enum.Font.SourceSans
-    box.TextSize = 14
-    box.Parent = frame
-
-    box.FocusLost:Connect(function()
-        local val = tonumber(box.Text)
-        if val then callback(val) end
-    end)
-    return lbl
-end
-
-local autoMobKill = false
-local fastAutoHitEnabled = false
-local VirtualUser = game:GetService("VirtualUser")
-
-local function startMobKillAura()
-    task.spawn(function()
-        while autoMobKill do
-            local player = game.Players.LocalPlayer
-            local char = player.Character
-            if char and char:FindFirstChild("HumanoidRootPart") then
-                for _, v in pairs(workspace:GetDescendants()) do
-                    if v:IsA("Model") and v:FindFirstChildOfClass("Humanoid") then
-                        if not game.Players:GetPlayerFromCharacter(v) and v ~= char then
-                            local hum = v:FindFirstChildOfClass("Humanoid")
-                            local hrp = v:FindFirstChild("HumanoidRootPart") or v:FindFirstChild("Torso")
-                            if hum and hum.Health > 0 and hrp then
-                                hrp.Size = Vector3.new(200, 200, 200)
-                                hrp.Transparency = 1
-                                hrp.CanCollide = false
-                            end
-                        end
-                    end
-                end
-                local tool = char:FindFirstChildOfClass("Tool")
-                if tool then tool:Activate() end
-            end
-            task.wait(0.08)
-        end
-    end)
-end
-
-local function startFastAutoHit()
-    task.spawn(function()
-        while fastAutoHitEnabled do
-            local player = game.Players.LocalPlayer
-            local char = player.Character
-            if char then
-                local tool = char:FindFirstChildOfClass("Tool")
-                VirtualUser:Button1Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-                VirtualUser:Button1Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-
-                if tool then
-                    tool:Activate()
-                    for _, v in pairs(tool:GetDescendants()) do
-                        if v:IsA("RemoteEvent") then
-                            local n = v.Name:lower()
-                            if n:find("swing") or n:find("attack") or n:find("hit") or n:find("slash") or n:find("use") then
-                                v:FireServer()
-                            end
-                        end
-                    end
-                end
-            end
-            task.wait(0.015)
-        end
-    end)
-end
-
-local mobBtnTextVIE = "⚡ LÃNH ĐỊA: ĐÁNH QUÁI TỪ XA [TẮT]"
-local mobBtnTextENG = "⚡ MOB KILL AURA [OFF]"
-local mobBtn = createButton(TabItems.Page, mobBtnTextVIE, function(btn)
-    autoMobKill = not autoMobKill
-    if autoMobKill then
-        btn.Text = currentLanguage == "VIE" and "⚡ LÃNH ĐỊA: ĐÁNH QUÁI TỪ XA [ĐANG BẬT]" or "⚡ MOB KILL AURA [ON]"
-        btn.BackgroundColor3 = Color3.fromRGB(20, 100, 40)
-        startMobKillAura()
-    else
-        btn.Text = currentLanguage == "VIE" and mobBtnTextVIE or mobBtnTextENG
-        btn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    end
-end)
-
-local fastHitBtnTextVIE = "⚡ TỰ ĐỘNG HIT + SIÊU TỐC ĐỘ (AUTO HIT FIX) [TẮT]"
-local fastHitBtnTextENG = "⚡ AUTO HIT & FAST SWING (FIXED) [OFF]"
-local fastHitBtn = createButton(TabItems.Page, fastHitBtnTextVIE, function(btn)
-    fastAutoHitEnabled = not fastAutoHitEnabled
-    if fastAutoHitEnabled then
-        btn.Text = currentLanguage == "VIE" and "⚡ TỰ ĐỘNG HIT + SIÊU TỐC ĐỘ (AUTO HIT FIX) [ĐANG BẬT]" or "⚡ AUTO HIT & FAST SWING (FIXED) [ON]"
-        btn.BackgroundColor3 = Color3.fromRGB(20, 100, 40)
-        startFastAutoHit()
-    else
-        btn.Text = currentLanguage == "VIE" and fastHitBtnTextVIE or fastHitBtnTextENG
-        btn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    end
-end)
-
-local function pullItem(itemName)
-    local char = game.Players.LocalPlayer.Character
-    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
-    local targetCF = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -4)
-
-    for _, v in pairs(workspace:GetDescendants()) do
-        if string.find(v.Name:lower(), itemName:lower()) then
-            local fullName = v:GetFullName():lower()
-            if not string.find(fullName, "map") and not string.find(fullName, "tree") and not string.find(fullName, "environment") then
-                if v:IsA("Model") then
-                    local pPart = v.PrimaryPart or v:FindFirstChildWhichIsA("BasePart")
-                    if pPart and not pPart.Anchored then v:PivotTo(targetCF) end
-                elseif v:IsA("BasePart") and not v.Anchored then
-                    v.CFrame = targetCF
-                end
-            end
-        end
-    end
-end
-
-local menuStructure = {
-    {
-        CategoryVIE = "Đồ ăn", CategoryENG = "Food",
-        Items = {
-            {LabelVIE = "Carrot (Cà rốt)", LabelENG = "Carrot", Key = "Carrot"},
-            {LabelVIE = "Morsel (Thịt nhỏ)", LabelENG = "Morsel", Key = "Morsel"},
-            {LabelVIE = "Steak (Bít tết)", LabelENG = "Steak", Key = "Steak"},
-            {LabelVIE = "Ribs (Sườn)", LabelENG = "Ribs", Key = "Ribs"},
-            {LabelVIE = "Berry (Quả mọng)", LabelENG = "Berry", Key = "Berry"},
-            {LabelVIE = "Corn (Ngô)", LabelENG = "Corn", Key = "Corn"},
-            {LabelVIE = "Cake (Bánh kem)", LabelENG = "Cake", Key = "Cake"},
-            {LabelVIE = "Pumpkin (Bí đỏ)", LabelENG = "Pumpkin", Key = "Pumpkin"}
+            document.getElementById(tabName).classList.add("active");
+            element.classList.add("active");
         }
-    },
-    {
-        CategoryVIE = "Hỗ trợ", CategoryENG = "Medical Support",
-        Items = {
-            {LabelVIE = "Băng gạc nhỏ", LabelENG = "Small Bandage", Key = "Bandage"},
-            {LabelVIE = "Băng gạc to", LabelENG = "Big Bandage / Medkit", Key = "Medkit"}
+
+        function toggleEzHubMenu() {
+            let ezMenu = document.getElementById("ez-hub-menu");
+            if (ezMenu.style.display === "flex") {
+                ezMenu.style.display = "none";
+            } else {
+                ezMenu.style.display = "flex";
+            }
         }
-    },
-    {
-        CategoryVIE = "Gỗ", CategoryENG = "Wood",
-        Items = {
-            {LabelVIE = "Log (Khúc gỗ)", LabelENG = "Log", Key = "Log"},
-            {LabelVIE = "Ghế gỗ", LabelENG = "Wooden Chair", Key = "Chair"},
-            {LabelVIE = "Mầm cây", LabelENG = "Sapling", Key = "Sapling"}
+
+        let isMinimized = false;
+        function toggleMinimize() {
+            let hub = document.getElementById("nice-hub");
+            let container = hub.querySelector(".content-container");
+            isMinimized = !isMinimized;
+            
+            if (isMinimized) {
+                container.style.display = "none";
+                hub.style.height = "35px";
+            } else {
+                container.style.display = "block";
+                hub.style.height = "380px";
+            }
         }
-    },
-    {
-        CategoryVIE = "Nhiên liệu", CategoryENG = "Fuel",
-        Items = {
-            {LabelVIE = "Coal (Than đá)", LabelENG = "Coal", Key = "Coal"},
-            {LabelVIE = "Fuel Canister (Bình nhiên liệu)", LabelENG = "Fuel", Key = "Fuel"},
-            {LabelVIE = "Oil Barrel (Thùng dầu)", LabelENG = "Oil", Key = "Oil"},
-            {LabelVIE = "Biofuel (Nhiên liệu sinh học)", LabelENG = "Biofuel", Key = "Biofuel"}
+
+        function showConfirm(show) {
+            document.getElementById("confirm-box").style.display = show ? "block" : "none";
         }
-    },
-    {
-        CategoryVIE = "Nguyên liệu", CategoryENG = "Materials",
-        Items = {
-            {LabelVIE = "Máy giặt", LabelENG = "Washing Machine", Key = "WashingMachine"},
-            {LabelVIE = "Động cơ ô tô cũ", LabelENG = "Engine", Key = "Engine"},
-            {LabelVIE = "Lò vi sóng", LabelENG = "Microwave", Key = "Microwave"},
-            {LabelVIE = "Lốp xe", LabelENG = "Tire", Key = "Tire"},
-            {LabelVIE = "Ghế kim loại", LabelENG = "Metal Chair", Key = "MetalChair"},
-            {LabelVIE = "Quạt hỏng", LabelENG = "Fan", Key = "Fan"},
-            {LabelVIE = "Đài radio hỏng", LabelENG = "Radio", Key = "Radio"},
-            {LabelVIE = "Bu lông", LabelENG = "Bolt", Key = "Bolt"},
-            {LabelVIE = "Tấm tôn / Kim loại", LabelENG = "Sheet Metal", Key = "SheetMetal"}
+
+        function closeNiceHub() {
+            document.getElementById("nice-hub").style.display = "none";
         }
-    }
-}
-
-local categoryUiList = {}
-
-for _, catData in ipairs(menuStructure) do
-    local CategoryFrame = Instance.new("Frame")
-    CategoryFrame.Size = UDim2.new(1, -6, 0, 30)
-    CategoryFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 42)
-    CategoryFrame.BorderSizePixel = 0
-    CategoryFrame.Parent = TabItems.Page
-
-    local CatHeader = Instance.new("TextButton")
-    CatHeader.Size = UDim2.new(1, 0, 0, 30)
-    CatHeader.Text = "  " .. catData.CategoryVIE .. "  v"
-    CatHeader.TextColor3 = Color3.fromRGB(255, 215, 0)
-    CatHeader.Font = Enum.Font.SourceSansBold
-    CatHeader.TextSize = 15
-    CatHeader.TextXAlignment = Enum.TextXAlignment.Left
-    CatHeader.BackgroundColor3 = Color3.fromRGB(35, 35, 42)
-    CatHeader.BorderSizePixel = 0
-    CatHeader.Parent = CategoryFrame
-
-    local ItemsContainer = Instance.new("Frame")
-    ItemsContainer.Size = UDim2.new(1, 0, 0, 0)
-    ItemsContainer.Position = UDim2.new(0, 0, 0, 30)
-    ItemsContainer.Visible = false
-    ItemsContainer.BackgroundColor3 = Color3.fromRGB(22, 22, 26)
-    ItemsContainer.BorderSizePixel = 0
-    ItemsContainer.Parent = CategoryFrame
-
-    local ItemListLayout = Instance.new("UIListLayout")
-    ItemListLayout.Parent = ItemsContainer
-    ItemListLayout.Padding = UDim.new(0, 2)
-
-    local itemBtns = {}
-    for _, item in ipairs(catData.Items) do
-        local ItemBtn = Instance.new("TextButton")
-        ItemBtn.Size = UDim2.new(1, 0, 0, 26)
-        ItemBtn.Text = "    > Hút " .. item.LabelVIE
-        ItemBtn.TextColor3 = Color3.fromRGB(210, 210, 210)
-        ItemBtn.Font = Enum.Font.SourceSans
-        ItemBtn.TextSize = 14
-        ItemBtn.TextXAlignment = Enum.TextXAlignment.Left
-        ItemBtn.BackgroundColor3 = Color3.fromRGB(28, 28, 34)
-        ItemBtn.BorderSizePixel = 0
-        ItemBtn.Parent = ItemsContainer
-
-        ItemBtn.MouseButton1Click:Connect(function() pullItem(item.Key) end)
-        table.insert(itemBtns, {Btn = ItemBtn, Data = item})
-    end
-
-    local isOpen = false
-    CatHeader.MouseButton1Click:Connect(function()
-        isOpen = not isOpen
-        ItemsContainer.Visible = isOpen
-        local catName = currentLanguage == "VIE" and catData.CategoryVIE or catData.CategoryENG
-        CatHeader.Text = "  " .. catName .. (isOpen and "  ^" or "  v")
-        local totalH = #catData.Items * 28
-        ItemsContainer.Size = UDim2.new(1, 0, 0, totalH)
-        CategoryFrame.Size = UDim2.new(1, -6, 0, isOpen and (30 + totalH) or 30)
-    end)
-
-    table.insert(categoryUiList, {Frame = CategoryFrame, Header = CatHeader, Data = catData, ItemBtns = itemBtns, GetOpen = function() return isOpen end})
-end
-
-local walkLabel = createInput(TabPlayer.Page, "Tốc độ di chuyển (WalkSpeed):", 16, function(val)
-    local char = game.Players.LocalPlayer.Character
-    if char and char:FindFirstChildOfClass("Humanoid") then
-        char:FindFirstChildOfClass("Humanoid").WalkSpeed = val
-    end
-end)
-
-local jumpLabel = createInput(TabPlayer.Page, "Độ cao nhảy (JumpPower):", 50, function(val)
-    local char = game.Players.LocalPlayer.Character
-    if char and char:FindFirstChildOfClass("Humanoid") then
-        char:FindFirstChildOfClass("Humanoid").JumpPower = val
-    end
-end)
-
-local chestEspEnabled = false
-local kidsEspEnabled = false
-local activeESP = {}
-
-local function clearESP()
-    for _, v in pairs(activeESP) do if v and v.Parent then v:Destroy() end end
-    activeESP = {}
-end
-
-local function addHighlight(obj, color, nameText)
-    if not obj then return end
-    local hl = Instance.new("Highlight")
-    hl.Adornee = obj
-    hl.FillColor = color
-    hl.OutlineColor = Color3.fromRGB(255, 255, 255)
-    hl.FillTransparency = 0.5
-    hl.Parent = ScreenGui
-    table.insert(activeESP, hl)
-
-    local billboard = Instance.new("BillboardGui")
-    billboard.Adornee = obj
-    billboard.Size = UDim2.new(0, 100, 0, 30)
-    billboard.AlwaysOnTop = true
-    billboard.Parent = ScreenGui
-
-    local txt = Instance.new("TextLabel")
-    txt.Size = UDim2.new(1, 0, 1, 0)
-    txt.Text = nameText
-    txt.TextColor3 = color
-    txt.Font = Enum.Font.SourceSansBold
-    txt.TextSize = 14
-    txt.BackgroundTransparency = 1
-    txt.Parent = billboard
-    table.insert(activeESP, billboard)
-end
-
-local function updateESP()
-    clearESP()
-    if not chestEspEnabled and not kidsEspEnabled then return end
-
-    for _, v in pairs(workspace:GetDescendants()) do
-        local nameLower = v.Name:lower()
-        if chestEspEnabled and string.find(nameLower, "chest") then
-            addHighlight(v, Color3.fromRGB(255, 215, 0), "Chest (Rương)")
-        elseif kidsEspEnabled and (string.find(nameLower, "kid") or string.find(nameLower, "child") or string.find(nameLower, "boy") or string.find(nameLower, "girl")) then
-            addHighlight(v, Color3.fromRGB(0, 255, 255), "Kid (Trẻ Em)")
-        end
-    end
-end
-
-local chestEspBtnTextVIE = "📦 ESP RƯƠNG [TẮT]"
-local chestEspBtnTextENG = "📦 CHEST ESP [OFF]"
-local chestBtn = createButton(TabESP.Page, chestEspBtnTextVIE, function(btn)
-    chestEspEnabled = not chestEspEnabled
-    if chestEspEnabled then
-        btn.Text = currentLanguage == "VIE" and "📦 ESP RƯƠNG [ĐANG BẬT]" or "📦 CHEST ESP [ON]"
-        btn.BackgroundColor3 = Color3.fromRGB(20, 100, 40)
-    else
-        btn.Text = currentLanguage == "VIE" and chestEspBtnTextVIE or chestEspBtnTextENG
-        btn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    end
-    updateESP()
-end)
-
-local kidsEspBtnTextVIE = "👶 ESP 4 ĐỨA TRẺ [TẮT]"
-local kidsEspBtnTextENG = "👶 4 KIDS ESP [OFF]"
-local kidsBtn = createButton(TabESP.Page, kidsEspBtnTextVIE, function(btn)
-    kidsEspEnabled = not kidsEspEnabled
-    if kidsEspEnabled then
-        btn.Text = currentLanguage == "VIE" and "👶 ESP 4 ĐỨA TRẺ [ĐANG BẬT]" or "👶 4 KIDS ESP [ON]"
-        btn.BackgroundColor3 = Color3.fromRGB(20, 100, 40)
-    else
-        btn.Text = currentLanguage == "VIE" and kidsEspBtnTextVIE or kidsEspBtnTextENG
-        btn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-    end
-    updateESP()
-end)
-
-local langHeader = Instance.new("TextLabel")
-langHeader.Size = UDim2.new(1, -6, 0, 25)
-langHeader.Text = "  🌐 Ngôn ngữ / Language"
-langHeader.TextColor3 = Color3.fromRGB(255, 215, 0)
-langHeader.Font = Enum.Font.SourceSansBold
-langHeader.TextSize = 15
-langHeader.TextXAlignment = Enum.TextXAlignment.Left
-langHeader.BackgroundTransparency = 1
-langHeader.Parent = TabSettings.Page
-
-local langVieBtn = createButton(TabSettings.Page, "✓ Tiếng Việt (Tự động)", function() end)
-local langEngBtn = createButton(TabSettings.Page, "  English", function() end)
-
-langVieBtn.BackgroundColor3 = Color3.fromRGB(130, 50, 200)
-
-local function switchLanguage(lang)
-    currentLanguage = lang
-    if lang == "VIE" then
-        langVieBtn.Text = "✓ Tiếng Việt (Tự động)"
-        langVieBtn.BackgroundColor3 = Color3.fromRGB(130, 50, 200)
-        langEngBtn.Text = "  English"
-        langEngBtn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-
-        ConfirmTitle.Text = "Bạn có chắc chắn muốn thoát không?"
-        ConfirmYes.Text = "Có"
-        ConfirmNo.Text = "Không"
-
-        mobBtn.Text = autoMobKill and "⚡ LÃNH ĐỊA: ĐÁNH QUÁI TỪ XA [ĐANG BẬT]" or mobBtnTextVIE
-        fastHitBtn.Text = fastAutoHitEnabled and "⚡ TỰ ĐỘNG HIT + SIÊU TỐC ĐỘ (AUTO HIT FIX) [ĐANG BẬT]" or fastHitBtnTextVIE
-        walkLabel.Text = "Tốc độ di chuyển (WalkSpeed):"
-        jumpLabel.Text = "Độ cao nhảy (JumpPower):"
-        chestBtn.Text = chestEspEnabled and "📦 ESP RƯƠNG [ĐANG BẬT]" or chestEspBtnTextVIE
-        kidsBtn.Text = kidsEspEnabled and "👶 ESP 4 ĐỨA TRẺ [ĐANG BẬT]" or kidsEspBtnTextVIE
-
-        for _, cat in ipairs(categoryUiList) do
-            cat.Header.Text = "  " .. cat.Data.CategoryVIE .. (cat.GetOpen() and "  ^" or "  v")
-            for _, item in ipairs(cat.ItemBtns) do
-                item.Btn.Text = "    > Hút " .. item.Data.LabelVIE
-            end
-        end
-    else
-        langEngBtn.Text = "✓ English"
-        langEngBtn.BackgroundColor3 = Color3.fromRGB(130, 50, 200)
-        langVieBtn.Text = "  Tiếng Việt"
-        langVieBtn.BackgroundColor3 = Color3.fromRGB(32, 32, 40)
-
-        ConfirmTitle.Text = "Are you sure you want to exit?"
-        ConfirmYes.Text = "Yes"
-        ConfirmNo.Text = "No"
-
-        mobBtn.Text = autoMobKill and "⚡ MOB KILL AURA [ON]" or mobBtnTextENG
-        fastHitBtn.Text = fastAutoHitEnabled and "⚡ AUTO HIT & FAST SWING (FIXED) [ON]" or fastHitBtnTextENG
-        walkLabel.Text = "Movement Speed (WalkSpeed):"
-        jumpLabel.Text = "Jump Height (JumpPower):"
-        chestBtn.Text = chestEspEnabled and "📦 CHEST ESP [ON]" or chestEspBtnTextENG
-        kidsBtn.Text = kidsEspEnabled and "👶 4 KIDS ESP [ON]" or kidsEspBtnTextENG
-
-        for _, cat in ipairs(categoryUiList) do
-            cat.Header.Text = "  " .. cat.Data.CategoryENG .. (cat.GetOpen() and "  ^" or "  v")
-            for _, item in ipairs(cat.ItemBtns) do
-                item.Btn.Text = "    > Pull " .. item.Data.LabelENG
-            end
-        end
-    end
-end
-
-langVieBtn.MouseButton1Click:Connect(function() switchLanguage("VIE") end)
-langEngBtn.MouseButton1Click:Connect(function() switchLanguage("ENG") end)`;
-
-    // 2. Mã Script Fix Lag mới
-    const fixLagScriptCode = `local CoreGui = game:GetService("CoreGui")
-local Players = game:GetService("Players")
-local Lighting = game:GetService("Lighting")
-local Workspace = game:GetService("Workspace")
-
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-
-pcall(function()
-    if CoreGui:FindFirstChild("LowPolyFixLagUI") then CoreGui.LowPolyFixLagUI:Destroy() end
-    if PlayerGui:FindFirstChild("LowPolyFixLagUI") then PlayerGui.LowPolyFixLagUI:Destroy() end
-end)
-
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "LowPolyFixLagUI"
-ScreenGui.ResetOnSpawn = false
-
-local successParent = pcall(function()
-    ScreenGui.Parent = CoreGui
-end)
-if not successParent then
-    ScreenGui.Parent = PlayerGui
-end
-
-local BubbleBtn = Instance.new("TextButton")
-BubbleBtn.Size = UDim2.new(0, 50, 0, 50)
-BubbleBtn.Position = UDim2.new(0.05, 0, 0.4, 0)
-BubbleBtn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
-BubbleBtn.Text = "🚀"
-BubbleBtn.TextSize = 24
-BubbleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-BubbleBtn.Visible = false
-BubbleBtn.Active = true
-BubbleBtn.Draggable = true
-BubbleBtn.ZIndex = 100
-BubbleBtn.Parent = ScreenGui
-
-local BubbleCorner = Instance.new("UICorner")
-BubbleCorner.CornerRadius = UDim.new(1, 0)
-BubbleCorner.Parent = BubbleBtn
-
-local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 280, 0, 170)
-MainFrame.Position = UDim2.new(0.5, -140, 0.35, 0)
-MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
-MainFrame.BorderSizePixel = 0
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Parent = ScreenGui
-
-local MainCorner = Instance.new("UICorner")
-MainCorner.CornerRadius = UDim.new(0, 10)
-MainCorner.Parent = MainFrame
-
-local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 38)
-TopBar.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
-TopBar.BorderSizePixel = 0
-TopBar.Parent = MainFrame
-
-local TopBarCorner = Instance.new("UICorner")
-TopBarCorner.CornerRadius = UDim.new(0, 10)
-TopBarCorner.Parent = TopBar
-
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, -80, 1, 0)
-Title.Position = UDim2.new(0, 12, 0, 0)
-Title.Text = "MENU FIX LAG (SIÊU NHẸ)"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 15
-Title.TextXAlignment = Enum.TextXAlignment.Left
-Title.BackgroundTransparency = 1
-Title.Parent = TopBar
-
-local MiniBtn = Instance.new("TextButton")
-MiniBtn.Size = UDim2.new(0, 32, 0, 32)
-MiniBtn.Position = UDim2.new(1, -70, 0, 3)
-MiniBtn.Text = "-"
-MiniBtn.Font = Enum.Font.SourceSansBold
-MiniBtn.TextSize = 24
-MiniBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
-MiniBtn.BackgroundTransparency = 1
-MiniBtn.Parent = TopBar
-
-local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 32, 0, 32)
-CloseBtn.Position = UDim2.new(1, -35, 0, 3)
-CloseBtn.Text = "X"
-CloseBtn.Font = Enum.Font.SourceSansBold
-CloseBtn.TextSize = 16
-CloseBtn.TextColor3 = Color3.fromRGB(255, 80, 80)
-CloseBtn.BackgroundTransparency = 1
-CloseBtn.Parent = TopBar
-
-local ToggleLagBtn = Instance.new("TextButton")
-ToggleLagBtn.Size = UDim2.new(1, -30, 0, 50)
-ToggleLagBtn.Position = UDim2.new(0, 15, 0, 75)
-ToggleLagBtn.Text = "BẬT FIX LAG [OFF]"
-ToggleLagBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
-ToggleLagBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-ToggleLagBtn.Font = Enum.Font.SourceSansBold
-ToggleLagBtn.TextSize = 16
-ToggleLagBtn.Parent = MainFrame
-
-local ToggleCorner = Instance.new("UICorner")
-ToggleCorner.CornerRadius = UDim.new(0, 8)
-ToggleCorner.Parent = ToggleLagBtn
-
-local ConfirmFrame = Instance.new("Frame")
-ConfirmFrame.Size = UDim2.new(1, 0, 1, 0)
-ConfirmFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
-ConfirmFrame.BackgroundTransparency = 0.05
-ConfirmFrame.Visible = false
-ConfirmFrame.ZIndex = 20
-ConfirmFrame.Parent = MainFrame
-
-local ConfirmCorner = Instance.new("UICorner")
-ConfirmCorner.CornerRadius = UDim.new(0, 10)
-ConfirmCorner.Parent = ConfirmFrame
-
-local ConfirmText = Instance.new("TextLabel")
-ConfirmText.Size = UDim2.new(1, -20, 0, 45)
-ConfirmText.Position = UDim2.new(0, 10, 0, 20)
-ConfirmText.Text = "Bạn chắc chứ?"
-ConfirmText.TextColor3 = Color3.fromRGB(255, 255, 255)
-ConfirmText.Font = Enum.Font.SourceSansBold
-ConfirmText.TextSize = 18
-ConfirmText.ZIndex = 21
-ConfirmText.BackgroundTransparency = 1
-ConfirmText.Parent = ConfirmFrame
-
-local YesBtn = Instance.new("TextButton")
-YesBtn.Size = UDim2.new(0, 95, 0, 40)
-YesBtn.Position = UDim2.new(0.1, 0, 0.55, 0)
-YesBtn.Text = "Có"
-YesBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
-YesBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-YesBtn.Font = Enum.Font.SourceSansBold
-YesBtn.TextSize = 16
-YesBtn.ZIndex = 21
-YesBtn.Parent = ConfirmFrame
-
-local YesCorner = Instance.new("UICorner")
-YesCorner.CornerRadius = UDim.new(0, 6)
-YesCorner.Parent = YesBtn
-
-local NoBtn = Instance.new("TextButton")
-NoBtn.Size = UDim2.new(0, 95, 0, 40)
-NoBtn.Position = UDim2.new(0.55, 0, 0.55, 0)
-NoBtn.Text = "Không"
-NoBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
-NoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-NoBtn.Font = Enum.Font.SourceSansBold
-NoBtn.TextSize = 16
-NoBtn.ZIndex = 21
-NoBtn.Parent = ConfirmFrame
-
-local NoCorner = Instance.new("UICorner")
-NoCorner.CornerRadius = UDim.new(0, 6)
-NoCorner.Parent = NoBtn
-
-local isFixLagActive = false
-
-local function runPotatoFixLag()
-    Lighting.GlobalShadows = false
-    Lighting.FogEnd = 9e9
-    Lighting.Brightness = 1
-
-    pcall(function()
-        Lighting.Technology = Enum.Technology.Compatibility
-    end)
-
-    local terrain = Workspace:FindFirstChildOfClass("Terrain")
-    if terrain then
-        terrain.Decoration = false
-        terrain.WaterWaveSize = 0
-        terrain.WaterWaveSpeed = 0
-        terrain.WaterReflectance = 0
-        terrain.WaterTransparency = 0
-    end
-
-    for _, v in ipairs(Workspace:GetDescendants()) do
-        if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Fire") or 
-           v:IsA("Sparkles") or v:IsA("Explosion") or v:IsA("Trail") or v:IsA("Beam") then
-            v:Destroy()
-        elseif v:IsA("Decal") or v:IsA("Texture") then
-            v:Destroy()
-        elseif v:IsA("BasePart") then
-            v.Material = Enum.Material.SmoothPlastic
-            v.Reflectance = 0
-            if v:IsA("MeshPart") then
-                v.TextureID = ""
-            end
-        end
-    end
-end
-
-ToggleLagBtn.MouseButton1Click:Connect(function()
-    isFixLagActive = not isFixLagActive
-    if isFixLagActive then
-        ToggleLagBtn.Text = "ĐÃ FIX LAG [ON]"
-        ToggleLagBtn.BackgroundColor3 = Color3.fromRGB(40, 170, 50)
-        runPotatoFixLag()
-    else
-        ToggleLagBtn.Text = "BẬT FIX LAG [OFF]"
-        ToggleLagBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
-    end
-end)
-
-MiniBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = false
-    BubbleBtn.Visible = true
-end)
-
-BubbleBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = true
-    BubbleBtn.Visible = false
-end)
-
-CloseBtn.MouseButton1Click:Connect(function()
-    ConfirmFrame.Visible = true
-end)
-
-NoBtn.MouseButton1Click:Connect(function()
-    ConfirmFrame.Visible = false
-end)
-
-YesBtn.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
-end)`;
-
-    // Hàm Copy TSOG HUB
-    function copyTSOG() {
-      navigator.clipboard.writeText(tsogScriptCode).then(() => {
-        alert('Đã sao chép TSOG HUB Script!');
-      }).catch(() => {
-        alert('Lỗi sao chép, vui lòng thử lại!');
-      });
-    }
-
-    // Hàm Copy Fix Lag
-    function copyFixLag() {
-      navigator.clipboard.writeText(fixLagScriptCode).then(() => {
-        alert('Đã sao chép Fix Lag Script!');
-      }).catch(() => {
-        alert('Lỗi sao chép, vui lòng thử lại!');
-      });
-    }
-  </script>
-
+    </script>
 </body>
 </html>
