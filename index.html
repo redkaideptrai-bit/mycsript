@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ez Hub - Roblox Action Script</title>
+    <title>Ez Hub & Nice Hub - Roblox Action Script</title>
     <style>
         * {
             box-sizing: border-box;
@@ -55,7 +55,7 @@
             border: 1px solid #2a2a35;
             border-radius: 8px;
             padding: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .script-input-container {
@@ -97,6 +97,7 @@
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 15px;
         }
 
         .ui-overview {
@@ -158,6 +159,11 @@
             margin-right: 10px;
         }
 
+        .card-badge.nice {
+            background-color: #00c8ff;
+            color: #000;
+        }
+
         .card-title {
             font-size: 16px;
             font-weight: bold;
@@ -182,20 +188,29 @@
 
 <div class="container">
     <div class="header">
-        <h1>Ez Hub</h1>
+        <h1>Ez Hub & Nice Hub</h1>
         <p>Hệ thống Script hỗ trợ Roblox với giao diện Action HUD linh hoạt</p>
     </div>
 
-    <!-- KHUNG LOADSTRING VÀ NÚT SAO CHÉP -->
+    <!-- NÚT SAO CHÉP EZ HUB -->
     <div class="script-box">
-        <div class="section-title" style="margin-bottom: 5px;">Mã Script (Loadstring)</div>
+        <div class="section-title" style="margin: 0;">Mã Script Ez Hub</div>
         <div class="script-input-container">
-            <input type="text" id="scriptLink" class="script-input" value="loadstring(game:HttpGet(&quot;LINK_RAW_SCRIPT_CỦA_BẠN_Ở_ĐÂY&quot;))()" readonly>
-            <button class="copy-btn" onclick="copyScript()">Sao chép</button>
+            <input type="text" id="ezHubLink" class="script-input" value="loadstring(game:HttpGet(&quot;LINK_RAW_EZ_HUB_CỦA_BẠN&quot;))()" readonly>
+            <button class="copy-btn" onclick="copyScript('ezHubLink', this)">Sao chép</button>
         </div>
     </div>
 
-    <div class="section-title">Tổng quan Giao diện (UI)</div>
+    <!-- NÚT SAO CHÉP NICE HUB -->
+    <div class="script-box">
+        <div class="section-title" style="margin: 0; color: #00c8ff;">Mã Script Nice Hub</div>
+        <div class="script-input-container">
+            <input type="text" id="niceHubLink" class="script-input" value="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/NiceHub/Main/main/script.lua&quot;))()" readonly>
+            <button class="copy-btn" style="background-color: #00c8ff; color: #000;" onclick="copyScript('niceHubLink', this)">Sao chép</button>
+        </div>
+    </div>
+
+    <div class="section-title">Tổng quan Giao diện Ez Hub</div>
     <div class="ui-overview">
         <ul>
             <li><strong>Logo R ("ez hub"):</strong> Nút tròn góc trái màn hình dùng để bật/tắt menu chính. Hỗ trợ kéo thả độc lập trên PC & Mobile.</li>
@@ -205,7 +220,7 @@
         </ul>
     </div>
 
-    <div class="section-title">Danh sách Phím Tác vụ</div>
+    <div class="section-title">Danh sách Phím Tác vụ Ez Hub</div>
     <div class="grid-features">
         <div class="card">
             <div class="card-header">
@@ -278,25 +293,46 @@
         </div>
     </div>
 
+    <div class="section-title" style="color: #00c8ff;">Tính năng Nice Hub</div>
+    <div class="grid-features">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-badge nice">NICE</span>
+                <span class="card-title">Auto Farm & Quest</span>
+            </div>
+            <div class="card-desc">
+                Tự động nhận nhiệm vụ, cày cấp và thu thập tài nguyên nhanh chóng.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-badge nice">NICE</span>
+                <span class="card-title">ESP & Visuals</span>
+            </div>
+            <div class="card-desc">
+                Hiển thị vị trí người chơi, rương, item và Boss xuyên tường.
+            </div>
+        </div>
+    </div>
+
     <div class="footer">
-        Ez Hub UI Script - KaiActionHUD Edition
+        Ez Hub & Nice Hub UI Script - KaiActionHUD Edition
     </div>
 </div>
 
 <script>
-    function copyScript() {
-        var copyText = document.getElementById("scriptLink");
+    function copyScript(inputId, btnElement) {
+        var copyText = document.getElementById(inputId);
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         navigator.clipboard.writeText(copyText.value);
         
-        var btn = document.querySelector(".copy-btn");
-        btn.innerText = "Đã chép!";
-        btn.style.backgroundColor = "#00c8ff";
+        var originalText = btnElement.innerText;
+        btnElement.innerText = "Đã chép!";
         
         setTimeout(function() {
-            btn.innerText = "Sao chép";
-            btn.style.backgroundColor = "#ff1e1e";
+            btnElement.innerText = originalText;
         }, 2000);
     }
 </script>
