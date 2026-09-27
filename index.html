@@ -83,13 +83,14 @@
 </head>
 <body>
 
-    <h1>Nice Hub Scripts</h1>
+    <h1>Script Hub Center</h1>
 
     <div class="container">
-        <!-- ITEM 1: NICE HUB DIRECT CODE -->
+        
+        <!-- ITEM 1: NICE HUB (BẢN CHUẨN) -->
         <div class="card">
-            <h2>Nice Hub Full Script</h2>
-            <textarea id="script-1" readonly>
+            <h2>1. Nice Hub (Bản Chuẩn Full Giao Diện)</h2>
+            <textarea id="script-nicehub" readonly>
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 local playerGui = player:WaitForChild("PlayerGui")
@@ -712,15 +713,61 @@ end
 langVieBtn.MouseButton1Click:Connect(function() switchLanguage("VIE") end)
 langEngBtn.MouseButton1Click:Connect(function() switchLanguage("ENG") end)
             </textarea>
-            <button class="btn-copy" onclick="copyScript('script-1', this)">Sao chép Nice Hub</button>
+            <button class="btn-copy" onclick="copyScript('script-nicehub', this)">Sao chép Nice Hub</button>
         </div>
+
+        <!-- ITEM 2: SCRIPT FIX LAG (BẢN TỐI ƯU FPS) -->
+        <div class="card">
+            <h2>2. Script Fix Lag (Tăng FPS, Tắt Hiệu Ứng)</h2>
+            <textarea id="script-fixlag" readonly>
+-- Script Fix Lag & Ultra Boost FPS
+local Lighting = game:GetService("Lighting")
+local Terrain = workspace:FindFirstChildOfClass("Terrain")
+
+if Terrain then
+    Terrain.WaterWaveSize = 0
+    Terrain.WaterWaveSpeed = 0
+    Terrain.WaterReflectance = 0
+    Terrain.WaterTransparency = 0
+end
+
+Lighting.GlobalShadows = false
+Lighting.FogEnd = 9e9
+settings().Rendering.QualityLevel = 1
+
+for _, v in pairs(game:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") then
+        v.Material = Enum.Material.SmoothPlastic
+        v.Reflectance = 0
+    elseif v:IsA("Decal") or v:IsA("Texture") then
+        v:Destroy()
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Smoke") or v:IsA("Fire") then
+        v.Enabled = false
+    end
+end
+
+print("Fix Lag thành công!")
+            </textarea>
+            <button class="btn-copy" onclick="copyScript('script-fixlag', this)">Sao chép Fix Lag</button>
+        </div>
+
+        <!-- ITEM 3: EZ HUB -->
+        <div class="card">
+            <h2>3. EZ Hub Script</h2>
+            <textarea id="script-ezhub" readonly>
+-- EZ Hub Script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EZ-Hub-Developer/EZ-Hub/main/loader.lua"))()
+            </textarea>
+            <button class="btn-copy" onclick="copyScript('script-ezhub', this)">Sao chép EZ Hub</button>
+        </div>
+
     </div>
 
     <script>
         function copyScript(elementId, btnElement) {
             const textarea = document.getElementById(elementId);
             textarea.select();
-            textarea.setSelectionRange(0, 99999); // Dành cho thiết bị di động
+            textarea.setSelectionRange(0, 99999); // Dành cho di động
 
             navigator.clipboard.writeText(textarea.value).then(() => {
                 const originalText = btnElement.innerText;
