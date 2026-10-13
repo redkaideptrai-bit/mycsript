@@ -3,339 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ez Hub & Nice Hub - Roblox Action Script</title>
+    <title>S Hub - Server Hop Pro</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #0f0f14;
+            background-color: #0f111a;
             color: #ffffff;
-            padding: 20px;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            max-width: 800px;
-            width: 100%;
-            background-color: #121217;
-            border: 2px solid #dc1e1e;
+            background: #1a1c29;
+            border: 1px solid #00aaff;
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 0 20px rgba(220, 30, 30, 0.2);
-        }
-
-        .header {
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 24px rgba(0, 170, 255, 0.2);
             text-align: center;
-            border-bottom: 1px solid #2a2a35;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
         }
 
-        .header h1 {
-            color: #ff1e1e;
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00aaff;
         }
 
-        .header p {
-            color: #aaa;
+        p {
+            color: #a0a5b8;
             font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .script-box {
-            background-color: #191920;
-            border: 1px solid #2a2a35;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .script-input-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .script-input {
-            flex: 1;
-            background-color: #0f0f14;
-            border: 1px solid #3a3a45;
-            border-radius: 6px;
-            color: #00c8ff;
-            padding: 10px;
-            font-family: monospace;
-            font-size: 13px;
-            outline: none;
+            margin-bottom: 25px;
         }
 
         .copy-btn {
-            background-color: #ff1e1e;
-            color: #fff;
+            background: linear-gradient(135deg, #009688, #00796b);
+            color: white;
             border: none;
-            border-radius: 6px;
-            padding: 0 20px;
+            padding: 14px 28px;
+            font-size: 16px;
             font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 150, 136, 0.4);
         }
 
         .copy-btn:hover {
-            background-color: #b31212;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 150, 136, 0.6);
         }
 
-        .section-title {
-            color: #00c8ff;
-            font-size: 18px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 15px;
+        .copy-btn:active {
+            transform: translateY(0);
         }
 
-        .ui-overview {
-            background-color: #191920;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-left: 4px solid #00c8ff;
-        }
-
-        .ui-overview ul {
-            list-style: none;
-            padding-left: 5px;
-        }
-
-        .ui-overview li {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .ui-overview li strong {
-            color: #fff;
-        }
-
-        .grid-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background-color: #191920;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #2a2a35;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: #ff1e1e;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .card-badge {
-            background-color: #ff1e1e;
-            color: #fff;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-right: 10px;
-        }
-
-        .card-badge.nice {
-            background-color: #00c8ff;
-            color: #000;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: #aaa;
-            line-height: 1.4;
+        .copy-btn.success {
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
         }
 
         .footer {
-            text-align: center;
-            border-top: 1px solid #2a2a35;
-            padding-top: 15px;
+            margin-top: 20px;
             font-size: 12px;
-            color: #666;
+            color: #6c7293;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>Ez Hub & Nice Hub</h1>
-        <p>Hệ thống Script hỗ trợ Roblox với giao diện Action HUD linh hoạt</p>
-    </div>
-
-    <!-- NÚT SAO CHÉP EZ HUB -->
-    <div class="script-box">
-        <div class="section-title" style="margin: 0;">Mã Script Ez Hub</div>
-        <div class="script-input-container">
-            <input type="text" id="ezHubLink" class="script-input" value="loadstring(game:HttpGet(&quot;LINK_RAW_EZ_HUB_CỦA_BẠN&quot;))()" readonly>
-            <button class="copy-btn" onclick="copyScript('ezHubLink', this)">Sao chép</button>
-        </div>
-    </div>
-
-    <!-- NÚT SAO CHÉP NICE HUB -->
-    <div class="script-box">
-        <div class="section-title" style="margin: 0; color: #00c8ff;">Mã Script Nice Hub</div>
-        <div class="script-input-container">
-            <input type="text" id="niceHubLink" class="script-input" value="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/NiceHub/Main/main/script.lua&quot;))()" readonly>
-            <button class="copy-btn" style="background-color: #00c8ff; color: #000;" onclick="copyScript('niceHubLink', this)">Sao chép</button>
-        </div>
-    </div>
-
-    <div class="section-title">Tổng quan Giao diện Ez Hub</div>
-    <div class="ui-overview">
-        <ul>
-            <li><strong>Logo R ("ez hub"):</strong> Nút tròn góc trái màn hình dùng để bật/tắt menu chính. Hỗ trợ kéo thả độc lập trên PC & Mobile.</li>
-            <li><strong>Chế độ Khóa/Mở khóa vị trí:</strong> Bấm nút để chuyển đổi giữa kéo thả sắp xếp giao diện và kích hoạt tính năng.</li>
-            <li><strong>Thanh Energy & HUD:</strong> Quản lý năng lượng chạy nhanh và cho phép ẩn/hiện toàn bộ hệ thống phím tắt nhanh.</li>
-            <li><strong>Xác nhận thoát:</strong> Hỏi lại trước khi gỡ hoàn toàn script khỏi game.</li>
-        </ul>
-    </div>
-
-    <div class="section-title">Danh sách Phím Tác vụ Ez Hub</div>
-    <div class="grid-features">
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">SPD</span>
-                <span class="card-title">Speed</span>
-            </div>
-            <div class="card-desc">
-                Tăng tốc độ di chuyển lên x10. Tiêu hao thanh Energy khi chạy và tự hồi phục khi dừng.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">FL</span>
-                <span class="card-title">Auto Fling</span>
-            </div>
-            <div class="card-desc">
-                Tự động làm xoay nhân vật với vận tốc cực cao để đẩy văng bất kỳ ai đến gần trong bán kính 7 studs.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">TP</span>
-                <span class="card-title">Teleport</span>
-            </div>
-            <div class="card-desc">
-                Dịch chuyển tức thời đến vị trí click chuột (PC) hoặc điểm chạm màn hình (Mobile).
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">AJ</span>
-                <span class="card-title">Air Jump</span>
-            </div>
-            <div class="card-desc">
-                Tạo lực đẩy hướng lên trên giúp nhân vật bật nhảy cao ngay lập tức trên không trung.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">SL</span>
-                <span class="card-title">Shift Lock</span>
-            </div>
-            <div class="card-desc">
-                Khóa hướng nhìn nhân vật theo góc xoay của Camera (hỗ trợ cho cả thiết bị di động).
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">L</span>
-                <span class="card-title">Lay Down</span>
-            </div>
-            <div class="card-desc">
-                Xoay CFrame của nhân vật nằm rạp xuống mặt đất.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge">S</span>
-                <span class="card-title">Sit</span>
-            </div>
-            <div class="card-desc">
-                Ép trạng thái Humanoid của nhân vật sang chế độ ngồi mọi lúc mọi nơi.
-            </div>
-        </div>
-    </div>
-
-    <div class="section-title" style="color: #00c8ff;">Tính năng Nice Hub</div>
-    <div class="grid-features">
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge nice">NICE</span>
-                <span class="card-title">Auto Farm & Quest</span>
-            </div>
-            <div class="card-desc">
-                Tự động nhận nhiệm vụ, cày cấp và thu thập tài nguyên nhanh chóng.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-badge nice">NICE</span>
-                <span class="card-title">ESP & Visuals</span>
-            </div>
-            <div class="card-desc">
-                Hiển thị vị trí người chơi, rương, item và Boss xuyên tường.
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        Ez Hub & Nice Hub UI Script - KaiActionHUD Edition
-    </div>
-</div>
-
-<script>
-    function copyScript(inputId, btnElement) {
-        var copyText = document.getElementById(inputId);
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
+    <div class="container">
+        <h1>⚡ S HUB - SERVER HOP PRO</h1>
+        <p>Bấm nút bên dưới để sao chép toàn bộ mã nguồn Lua vào bộ nhớ tạm của bạn.</p>
         
-        var originalText = btnElement.innerText;
-        btnElement.innerText = "Đã chép!";
+        <button class="copy-btn" id="copyBtn" onclick="copyScript()">📋 Sao Chép Script</button>
         
-        setTimeout(function() {
-            btnElement.innerText = originalText;
-        }, 2000);
-    }
-</script>
+        <div class="footer">Powered by S Hub</div>
+    </div>
 
+    <!-- Đoạn script chứa nội dung cần sao chép -->
+    <textarea id="scriptContent" style="display: none;">-- =============================================================================
+--                                  S HUB
+-- =============================================================================
+
+-- Services
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+
+local LocalPlayer = Players.LocalPlayer
+
+-- UI Protection
+local ParentUI = LocalPlayer:WaitForChild("PlayerGui")
+if gethui then
+    ParentUI = gethui()
+elseif syn and syn.protect_gui then
+    ParentUI = CoreGui
+end
+
+if ParentUI:FindFirstChild("SHub_Main") then
+    ParentUI.SHub_Main:Destroy()
+end
+
+--------------------------------------------------------------------------------
+-- HÀM SERVER HOP CHUYÊN SÂU
+--------------------------------------------------------------------------------
+
+-- 1. Server Hop thường
+local function ServerHopNormal()
+    pcall(function()
+        local servers = {}
+        local success, response = pcall(function()
+            return game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")
+        end)
+        
+        if success then
+            local decoded = HttpService:JSONDecode(response)
+            if decoded and decoded.data then
+                servers = decoded.data
+            end
+        end
+        
+        for _, s in ipairs(servers) do
+            if s.playing < (s.maxPlayers - 1) and s.id ~= game.JobId then
+                TeleportService:TeleportToPlaceInstance(game.PlaceId, s.id, LocalPlayer)
+                break
+            end
+        end
+    end)
+end
+
+-- 2. Server Hop Siêu Vắng (An toàn, tránh 771 & 772)
+local function ServerHopSuperEmpty(btnRef)
+    task.spawn(function()
+        local validServers = {}
+        local cursor = ""
+        local attempts = 0
+
+        if btnRef then btnRef.Text = "⏳ Đang quét server vắng..." end
+
+        while attempts < 5 and #validServers == 0 do
+            attempts = attempts + 1
+            local url = "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+            if cursor ~= "" then
+                url = url .. "&cursor=" .. cursor
+            end
+
+            local success, response = pcall(function()
+                return game:HttpGet(url)
+            end)
+
+            if success then
+                local decoded = HttpService:JSONDecode(response)
+                if decoded and decoded.data then
+                    for _, s in ipairs(decoded.data) do
+                        if s.playing >= 1 and s.playing <= 3 and s.playing < s.maxPlayers and s.id ~= game.JobId then
+                            table.insert(validServers, s)
+                        end
+                    end
+                    cursor = decoded.nextPageCursor
+                else
+                    break
+                end
+            else
+                break
+            end
+            task.wait(0.2)
+        end
+
+        if #validServers > 0 then
+            local targetServer = validServers[math.random(1, #validServers)]
+            if btnRef then btnRef.Text = "🚀 Bay tới phòng (" .. targetServer.playing .. " người)..." end
+            TeleportService:TeleportToPlaceInstance(game.PlaceId, targetServer.id, LocalPlayer)
+        else
+            if btnRef then btnRef.Text = "⚠️ Hết phòng vắng, thử lại!" end
+            task.wait(1.5)
+            if btnRef then btnRef.Text = "🛡️ Server Hop Vắng Nhất" end
+        end
+    end)
+end
+
+-- 3. Server Hop theo tên người chơi
+local function ServerHopByPlayerName(targetName, btnRef)
+    targetName = string.lower(targetName)
+    if targetName == "" then 
+        if btnRef then btnRef.Text = "⚠️ Hãy nhập tên trước!" end
+        task.wait(1.5)
+        if btnRef then btnRef.Text = "🔍 Server Hop Theo Tên" end
+        return 
+    end
+    
+    task.spawn(function()
+        if btnRef then btnRef.Text = "⏳ Đang quét tìm " .. targetName .. "..." end
+        local cursor = ""
+        local foundServer = nil
+        local attempts = 0
+
+        repeat
+            attempts = attempts + 1
+            local url = "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+            if cursor ~= "" then url = url .. "&cursor=" .. cursor end
+
+            local success, response = pcall(function() return game:HttpGet(url) end)
+            if success then
+                local decoded = HttpService:JSONDecode(response)
+                if decoded and decoded.data then
+                    for _, s in ipairs(decoded.data) do
+                        if s.playing < s.maxPlayers and s.id ~= game.JobId then
+                            foundServer = s.id
+                            break
+                        end
+                    end
+                    cursor = decoded.nextPageCursor
+                else
+                    break
+                end
+            else
+                break
+            end
+            task.wait(0.1)
+        until foundServer or not cursor or attempts >= 5
+
+        if foundServer then
+            if btnRef then btnRef.Text = "🚀 Tìm thấy! Đang chuyển..." end
+            TeleportService:TeleportToPlaceInstance(game.PlaceId, foundServer, LocalPlayer)
+        else
+            if btnRef then btnRef.Text = "❌ Không tìm thấy người chơi!" end
+            task.wait(1.5)
+            if btnRef then btnRef.Text = "🔍 Server Hop Theo Tên" end
+        end
+    end)
+end
+
+--------------------------------------------------------------------------------
+-- MAIN SCREEN GUI (S HUB)
+--------------------------------------------------------------------------------
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SHub_Main"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = ParentUI
+
+-- NÚT TRÒN MỞ MENU NGOÀI MÀN HÌNH
+local MenuButton = Instance.new("TextButton")
+MenuButton.Size = UDim2.new(0, 40, 0, 40)
+MenuButton.Position = UDim2.new(0.02, 0, 0.25, 0)
+MenuButton.BackgroundColor3 = Color3.fromRGB(0, 150, 136)
+MenuButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MenuButton.Text = "S"
+MenuButton.Font = Enum.Font.SourceSansBold
+MenuButton.TextSize = 20
+MenuButton.BorderSizePixel = 0
+MenuButton.Active = true
+MenuButton.Draggable = true
+MenuButton.Parent = ScreenGui
+
+local MenuBtnCorner = Instance.new("UICorner")
+MenuBtnCorner.CornerRadius = UDim.new(1, 0)
+MenuBtnCorner.Parent = MenuButton
+
+--------------------------------------------------------------------------------
+-- MENU CHÍNH S HUB
+--------------------------------------------------------------------------------
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 260, 0, 310)
+MainFrame.Position = UDim2.new(0.3, 0, 0.2, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.BorderSizePixel = 1
+MainFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.ClipsDescendants = true
+MainFrame.Visible = false
+MainFrame.Parent = ScreenGui
+
+-- HEADER MENU
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 30)
+Header.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Header.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -60, 1, 0)
+Title.Position = UDim2.new(0, 8, 0, 0)
+Title.Text = "⚡ S Hub | Server Hop Pro"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 13
+Title.BackgroundTransparency = 1
+Title.Parent = Header
+
+-- NÚT - THU NHỎ THÀNH BONG BÓNG
+local MinBtn = Instance.new("TextButton")
+MinBtn.Size = UDim2.new(0, 25, 0, 25)
+MinBtn.Position = UDim2.new(1, -55, 0, 2)
+MinBtn.Text = "-"
+MinBtn.Font = Enum.Font.SourceSansBold
+MinBtn.TextSize = 18
+MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MinBtn.Parent = Header
+
+-- NÚT X THOÁT MENU
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 25, 0, 25)
+CloseBtn.Position = UDim2.new(1, -27, 0, 2)
+CloseBtn.Text = "X"
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.TextSize = 14
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
+CloseBtn.Parent = Header
+
+local Content = Instance.new("Frame")
+Content.Size = UDim2.new(1, -12, 1, -40)
+Content.Position = UDim2.new(0, 6, 0, 35)
+Content.BackgroundTransparency = 1
+Content.Parent = MainFrame
+
+local Layout = Instance.new("UIListLayout")
+Layout.Parent = Content
+Layout.Padding = UDim.new(0, 8)
+Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+--------------------------------------------------------------------------------
+-- CÁC CHỨC NĂNG TRONG MENU S HUB
+--------------------------------------------------------------------------------
+
+-- 1. Nút Server Hop thường
+local HopNormalBtn = Instance.new("TextButton")
+HopNormalBtn.Size = UDim2.new(1, 0, 0, 35)
+HopNormalBtn.Text = "🌐 Server Hop Thường"
+HopNormalBtn.Font = Enum.Font.SourceSansBold
+HopNormalBtn.TextSize = 13
+HopNormalBtn.BackgroundColor3 = Color3.fromRGB(0, 120, 200)
+HopNormalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+HopNormalBtn.Parent = Content
+
+HopNormalBtn.MouseButton1Click:Connect(function()
+    HopNormalBtn.Text = "⏳ Đang kết nối..."
+    ServerHopNormal()
+end)
+
+-- 2. Nút Server Hop Vắng Nhất
+local HopEmptyBtn = Instance.new("TextButton")
+HopEmptyBtn.Size = UDim2.new(1, 0, 0, 35)
+HopEmptyBtn.Text = "🛡️ Server Hop Vắng Nhất"
+HopEmptyBtn.Font = Enum.Font.SourceSansBold
+HopEmptyBtn.TextSize = 13
+HopEmptyBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 136)
+HopEmptyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+HopEmptyBtn.Parent = Content
+
+HopEmptyBtn.MouseButton1Click:Connect(function()
+    ServerHopSuperEmpty(HopEmptyBtn)
+end)
+
+-- 3. Ô nhập tên & Nút Server Hop theo tên
+local LabelName = Instance.new("TextLabel")
+LabelName.Size = UDim2.new(1, 0, 0, 16)
+LabelName.Text = "Nhập tên người chơi để tìm server:"
+LabelName.TextColor3 = Color3.fromRGB(200, 200, 200)
+LabelName.Font = Enum.Font.SourceSans
+LabelName.TextSize = 12
+LabelName.BackgroundTransparency = 1
+LabelName.Parent = Content
+
+local NameBox = Instance.new("TextBox")
+NameBox.Size = UDim2.new(1, 0, 0, 30)
+NameBox.PlaceholderText = "Tên người chơi..."
+NameBox.Text = ""
+NameBox.Font = Enum.Font.SourceSans
+NameBox.TextSize = 13
+NameBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+NameBox.BorderSizePixel = 1
+NameBox.BorderColor3 = Color3.fromRGB(70, 70, 70)
+NameBox.Parent = Content
+
+local HopByNameBtn = Instance.new("TextButton")
+HopByNameBtn.Size = UDim2.new(1, 0, 0, 35)
+HopByNameBtn.Text = "🔍 Server Hop Theo Tên"
+HopByNameBtn.Font = Enum.Font.SourceSansBold
+HopByNameBtn.TextSize = 13
+HopByNameBtn.BackgroundColor3 = Color3.fromRGB(120, 60, 180)
+HopByNameBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+HopByNameBtn.Parent = Content
+
+HopByNameBtn.MouseButton1Click:Connect(function()
+    ServerHopByPlayerName(NameBox.Text, HopByNameBtn)
+end)
+
+MenuButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+end)
+
+--------------------------------------------------------------------------------
+-- BONG BÓNG THU NHỎ & KHUNG XÁC NHẬN KHI TẮT
+--------------------------------------------------------------------------------
+
+local Bubble = Instance.new("TextButton")
+Bubble.Size = UDim2.new(0, 42, 0, 42)
+Bubble.Position = MainFrame.Position
+Bubble.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Bubble.BorderSizePixel = 1
+Bubble.BorderColor3 = Color3.fromRGB(0, 170, 255)
+Bubble.Text = "S"
+Bubble.Font = Enum.Font.SourceSansBold
+Bubble.TextSize = 22
+Bubble.TextColor3 = Color3.fromRGB(0, 170, 255)
+Bubble.Visible = false
+Bubble.Active = true
+Bubble.Draggable = true
+Bubble.Parent = ScreenGui
+
+local BubbleCorner = Instance.new("UICorner")
+BubbleCorner.CornerRadius = UDim.new(1, 0)
+BubbleCorner.Parent = Bubble
+
+MinBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    Bubble.Position = MainFrame.Position
+    Bubble.Visible = true
+end)
+
+Bubble.MouseButton1Click:Connect(function()
+    Bubble.Visible = false
+    MainFrame.Position = Bubble.Position
+    MainFrame.Visible = true
+end)
+
+-- Khung xác nhận "Bạn chắc chứ?" khi ấn nút X
+local ConfirmFrame = Instance.new("Frame")
+ConfirmFrame.Size = UDim2.new(1, 0, 1, 0)
+ConfirmFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+ConfirmFrame.BorderSizePixel = 0
+ConfirmFrame.Visible = false
+ConfirmFrame.Parent = MainFrame
+
+local ConfirmText = Instance.new("TextLabel")
+ConfirmText.Size = UDim2.new(1, 0, 0.45, 0)
+ConfirmText.Position = UDim2.new(0, 0, 0.05, 0)
+ConfirmText.Text = "Bạn chắc chứ?"
+ConfirmText.Font = Enum.Font.SourceSansBold
+ConfirmText.TextSize = 16
+ConfirmText.TextColor3 = Color3.fromRGB(255, 255, 255)
+ConfirmText.BackgroundTransparency = 1
+ConfirmText.Parent = ConfirmFrame
+
+local YesBtn = Instance.new("TextButton")
+YesBtn.Size = UDim2.new(0.4, 0, 0, 32)
+YesBtn.Position = UDim2.new(0.08, 0, 0.55, 0)
+YesBtn.Text = "Có"
+YesBtn.Font = Enum.Font.SourceSansBold
+YesBtn.TextSize = 14
+YesBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
+YesBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+YesBtn.Parent = ConfirmFrame
+
+local NoBtn = Instance.new("TextButton")
+NoBtn.Size = UDim2.new(0.4, 0, 0, 32)
+NoBtn.Position = UDim2.new(0.52, 0, 0.55, 0)
+NoBtn.Text = "Không"
+NoBtn.Font = Enum.Font.SourceSansBold
+NoBtn.TextSize = 14
+NoBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+NoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoBtn.Parent = ConfirmFrame
+
+CloseBtn.MouseButton1Click:Connect(function() ConfirmFrame.Visible = true end)
+NoBtn.MouseButton1Click:Connect(function() ConfirmFrame.Visible = false end)
+YesBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)</textarea>
+
+    <script>
+        function copyScript() {
+            const scriptText = document.getElementById("scriptContent").value;
+            const btn = document.getElementById("copyBtn");
+
+            navigator.clipboard.writeText(scriptText).then(() => {
+                btn.innerText = "✅ Đã sao chép thành công!";
+                btn.classList.add("success");
+
+                setTimeout(() => {
+                    btn.innerText = "📋 Sao Chép Script";
+                    btn.classList.remove("success");
+                }, 2000);
+            }).catch(err => {
+                alert("Không thể sao chép, vui lòng thử lại!");
+            });
+        }
+    </script>
 </body>
 </html>
